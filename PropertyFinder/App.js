@@ -4,13 +4,18 @@
  * @flow
  */
 'use strict';
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+// import {
+//   Platform,
+//   StyleSheet,
+//   Text,
+//   View
+// } from 'react-native';
 import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+  StackNavigator,
+} from 'react-navigation';
+import SearchPage from './SearchPage';
+import SearchResults from './SearchResults';
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' +
@@ -20,20 +25,31 @@ import {
 // });
 
 type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return React.createElement(Text, {style: styles.description}, "Search for houses to buy!");
-  }
-}
+// // export default class App extends Component<Props> {
+// class SearchPage extends Component<{}> {
+//   static navigationOptions = {
+//   title: 'Property Finder',
+// };
+//   render() {
+//     // return React.createElement(Text, {style: styles.description}, "Search for houses to buy!");
+//     return <Text style={styles.description}>Search for houses to buy!</Text>;
+//   }
+// }
 
-const styles = StyleSheet.create({
-  description: {
-    fontSize: 18,
-    textAlign: 'center',
-    color: '#656565',
-    marginTop: 65,
-  },
+const App = StackNavigator({
+  Home: { screen: SearchPage },
+  Results: { screen: SearchResults },
 });
+export default App;
+
+// const styles = StyleSheet.create({
+//   description: {
+//     fontSize: 18,
+//     textAlign: 'center',
+//     color: '#656565',
+//     marginTop: 65,
+//   },
+// });
 
 // const styles = StyleSheet.create({
 //   container: {
