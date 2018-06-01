@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "sdkVersion": "27.0.0",
+	"name": "AwesomeProject",
+    "description": "Description of the application",
+	"android": {
+      "package": "com.awesome.awesomeProject"
+    }
+  }
+}
