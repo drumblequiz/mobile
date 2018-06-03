@@ -1,33 +1,19 @@
-import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import React from 'react';
+import { AppRegistry } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-class Blink extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {isShowingText: true};
+import AppReducer from './reducers/AppReducer';
+import AppWithNavigationState from './components/AppNavigator';
 
-    // Toggle the state every second
-    setInterval(() => {
-      this.setState(previousState => {
-        return { isShowingText: !previousState.isShowingText };
-      });
-    }, 1000);
-  }
+export default class ReduxExampleApp extends React.Component {
+  store = createStore(AppReducer);
 
   render() {
-    let display = this.state.isShowingText ? this.props.text : ' ';
     return (
-      <Text>{display}</Text>
-    );
-  }
-}
-
-export default class BlinkApp extends Component {
-  render() {
-    return (
-      <View>
-        <Blink text='I love to blink182' />
-      </View>
+      <Provider store={this.store}>
+        <AppWithNavigationState />
+      </Provider>
     );
   }
 }
