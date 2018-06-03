@@ -1,3 +1,4 @@
 {
-  "buttonName" : "button"
+  "joinButton" : "JOIN",
+  "roomId" : "ROOM ID"
 }

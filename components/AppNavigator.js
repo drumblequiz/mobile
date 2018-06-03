@@ -14,7 +14,7 @@ export const AppNavigator = createStackNavigator({
 {
   initialRouteName: 'Home',
   cardStyle: {
-    backgroundColor : "#455A64",
+    backgroundColor : '#212121',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   }
 });

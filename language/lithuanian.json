@@ -1,3 +1,4 @@
 {
-  "buttonName" : "mygtukas"
+  "joinButton" : "PRISIJUNGTI",
+  "roomId" : "KAMBARIO ID"
 }
