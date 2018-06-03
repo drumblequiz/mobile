@@ -1,4 +1,5 @@
 {
   "joinButton" : "PRISIJUNGTI",
-  "roomId" : "KAMBARIO ID"
+  "roomId" : "KAMBARIO ID",
+  "displayName" : "VARDAS"
 }

@@ -1,4 +1,5 @@
 {
   "joinButton" : "JOIN",
-  "roomId" : "ROOM ID"
+  "roomId" : "ROOM ID",
+  "displayName" : "DISPLAY NAME"
 }

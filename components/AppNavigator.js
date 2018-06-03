@@ -6,10 +6,12 @@ import { connect } from 'react-redux';
 
 import Home from '../screens/HomeScreen.js';
 import Options from '../screens/OptionsScreen.js';
+import Join from '../screens/JoinScreen.js';
 
 export const AppNavigator = createStackNavigator({
   Home: { screen: Home },
   Options: { screen: Options },
+  Join: {screen: Join},
 },
 {
   initialRouteName: 'Home',

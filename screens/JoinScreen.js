@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import styleGeneral from '../styles/general.js';
 
-class HomeScreen extends React.Component {
+class JoinScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {text: ''};
@@ -26,12 +26,8 @@ class HomeScreen extends React.Component {
     console.log(lang);
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
-        <View style={{flex:10, alignItems :'center', justifyContent:'center'}}>
-          <Image
-            width={300}
-            source={require('../images/DrumbleQuizLogo.png')}
-          />
-          <Text style={[{width:300, height: 20}]}>{lang.roomId}</Text>
+        <View style={{flex:8, alignItems :'center', justifyContent:'center'}}>
+          <Text style={[{width:300, height: 20}]}>{lang.displayName}</Text>
           <TextInput
             style={[styleGeneral.roomId, {width:300, height: 40}]}
             defaultValue=''
@@ -44,7 +40,7 @@ class HomeScreen extends React.Component {
             onChangeText={(text) => this.setState({text})}
           />
           <TouchableNativeFeedback
-            onPress={() => this.props.navigation.navigate('Join')}>
+            onPress={() => this.props.navigation.navigate('Options')}>
             <View style={[styleGeneral.joinButton, {width:300, height: 40}]}>
               <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.joinButton}</Text>
             </View>
@@ -70,4 +66,4 @@ const mapStateToProps = state => {
   return { language: state.language };
 };
 
-export default connect(mapStateToProps)(HomeScreen);
+export default connect(mapStateToProps)(JoinScreen);
