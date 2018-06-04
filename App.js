@@ -1,13 +1,23 @@
 import React from 'react';
-import { AppRegistry } from 'react-native';
+import { YellowBox, AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware  } from 'redux';
+import thunk from 'redux-thunk';
+import { init as websocketInit, emit } from './actions/websockets';
 
 import AppReducer from './reducers/AppReducer';
 import AppWithNavigationState from './components/AppNavigator';
 
+YellowBox.ignoreWarnings(['Setting a timer']);
+
 export default class ReduxExampleApp extends React.Component {
-  store = createStore(AppReducer);
+  constructor (props) {
+    super(props);
+    middleware = [ thunk.withExtraArgument({ emit }) ];
+    this.store = createStore(AppReducer, applyMiddleware(...middleware));
+    websocketInit(this.store);
+  }
+
 
   render() {
     return (

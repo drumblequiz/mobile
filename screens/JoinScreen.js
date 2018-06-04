@@ -3,6 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
+import {doesRoomExist} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -40,7 +41,7 @@ class JoinScreen extends React.Component {
             onChangeText={(text) => this.setState({text})}
           />
           <TouchableNativeFeedback
-            onPress={() => this.props.navigation.navigate('Options')}>
+            onPress={() => doesRoomExist('ABCD')}> 
             <View style={[styleGeneral.joinButton, {width:300, height: 40}]}>
               <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.joinButton}</Text>
             </View>
