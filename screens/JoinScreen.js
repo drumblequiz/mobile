@@ -22,9 +22,19 @@ class JoinScreen extends React.Component {
     return this.props.language.language;
   }
 
+  doesRoomExistt() {
+    return this.props.socket.roomExists;
+  }
+
   render() {
     const lang = this.selectedLanguage();
-    console.log(lang);
+    const exists = this.doesRoomExistt();
+    console.log(exists);
+    if(exists){
+      someText='gavom'
+    } else {
+      someText='negavom'
+    }
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
         <View style={{flex:8, alignItems :'center', justifyContent:'center'}}>
@@ -41,9 +51,9 @@ class JoinScreen extends React.Component {
             onChangeText={(text) => this.setState({text})}
           />
           <TouchableNativeFeedback
-            onPress={() => doesRoomExist('ABCD')}> 
+            onPress={() => this.props.doesRoomExist('ABCD')}>
             <View style={[styleGeneral.joinButton, {width:300, height: 40}]}>
-              <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.joinButton}</Text>
+              <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{someText}</Text>
             </View>
           </TouchableNativeFeedback>
         </View>
@@ -64,7 +74,7 @@ class JoinScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { language: state.language };
+  return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps)(JoinScreen);
+export default connect(mapStateToProps, {doesRoomExist, })(JoinScreen);
