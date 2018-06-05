@@ -1,6 +1,8 @@
 import io from 'socket.io-client';
-import {messageTypes, uri} from '../constants/websocket.js';
-const socket = io( uri );
+import {messageTypes} from '../constants/websocket.js';
+import config from '../config.json';
+
+const socket = io( config.serverAddress );
 
 const init = ( store ) => {
   Object.keys( messageTypes )
