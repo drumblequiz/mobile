@@ -1,5 +1,6 @@
 {
   "joinButton" : "PRISIJUNGTI",
   "roomId" : "KAMBARIO ID",
-  "displayName" : "VARDAS"
+  "displayName" : "VARDAS",
+  "waitingForGame" : "Laukiama pradžios",
 }

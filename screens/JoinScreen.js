@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
 import {doesRoomExist} from '../actions/network.js';
@@ -24,6 +24,19 @@ class JoinScreen extends React.Component {
 
   doesRoomExistt() {
     return this.props.socket.roomExists;
+  }
+
+  shouldComponentUpdate(){
+    if(this.doesRoomExistt()){
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Home' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+      return false;
+    }
+    return true;
   }
 
   render() {

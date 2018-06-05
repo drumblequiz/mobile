@@ -1,5 +1,6 @@
 {
   "joinButton" : "JOIN",
   "roomId" : "ROOM ID",
-  "displayName" : "DISPLAY NAME"
+  "displayName" : "DISPLAY NAME",
+  "waitingForGame" : "Waiting For Game",
 }
