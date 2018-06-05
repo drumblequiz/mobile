@@ -2,7 +2,7 @@ import ltLang from '../language/lithuanian.json';
 import enLang from '../language/english.json';
 
 const initialState = {
-  language: ltLang,
+  language: enLang,
 };
 
 const LanguageReducer = (state = initialState, action) => {

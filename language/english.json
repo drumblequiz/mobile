@@ -6,4 +6,6 @@
   "loginHash" : "LOGIN HASH",
   "loginButton" : "PLEASE LOGIN",
   "noHashCodeButton" : "DON'T HAVE HASH",
+  "registerButton" : "REGISTER",
+  "registerLabel" : "E-MAIL",
 }

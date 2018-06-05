@@ -6,4 +6,6 @@
   "loginHash" : "PRISIJUNGIMO KODAS",
   "loginButton" : " PRAŠOME PRISIJUNGTI",
   "noHashCodeButton" : "NETURIU KODO",
+  "registerButton" : "REGISTRUOTIS",
+  "registerLabel" : "EL-PAŠTAS",
 }
