@@ -3,4 +3,7 @@
   "roomId" : "ROOM ID",
   "displayName" : "DISPLAY NAME",
   "waitingForGame" : "Waiting For Game",
+  "loginHash" : "LOGIN HASH",
+  "loginButton" : "PLEASE LOGIN",
+  "noHashCodeButton" : "DON'T HAVE HASH",
 }

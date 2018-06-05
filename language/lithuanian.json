@@ -1,6 +1,9 @@
 {
-  "joinButton" : "PRISIJUNGTI",
+  "joinButton" : "PRADĖTI",
   "roomId" : "KAMBARIO ID",
   "displayName" : "VARDAS",
   "waitingForGame" : "Laukiama pradžios",
+  "loginHash" : "PRISIJUNGIMO KODAS",
+  "loginButton" : " PRAŠOME PRISIJUNGTI",
+  "noHashCodeButton" : "NETURIU KODO",
 }

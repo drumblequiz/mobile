@@ -8,12 +8,14 @@ import Home from '../screens/HomeScreen.js';
 import Options from '../screens/OptionsScreen.js';
 import Join from '../screens/JoinScreen.js';
 import WaitingGame from '../screens/WaitingGameScreen.js';
+import Login from '../screens/LoginScreen.js';
 
 export const AppNavigator = createStackNavigator({
   Home: { screen: Home },
   Options: { screen: Options },
   Join: {screen: Join},
   WaitingGame: {screen: WaitingGame},
+  Login: {screen: Login},
 },
 {
   initialRouteName: 'Home',
