@@ -3,7 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import {doesRoomExist} from '../actions/network.js';
+import { joinRoom} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -22,8 +22,12 @@ class JoinScreen extends React.Component {
     return this.props.language.language;
   }
 
-  doesRoomExistt() {
+  checkPropRoomExists() {
     return this.props.socket.roomExists;
+  }
+
+  handleNameEnterClick() {
+    this.props.joinRoom(this.props.socket.roomId,this.props.socket.userId ,this.state.text)
   }
 
   shouldComponentUpdate(){
@@ -68,7 +72,7 @@ class JoinScreen extends React.Component {
             onChangeText={(text) => this.setState({text})}
           />
           <TouchableNativeFeedback
-            onPress={() => this.props.doesRoomExist('ABCD')}>
+            onPress={() => this.props.handleNameEnterClick()}>
             <View style={[styleGeneral.joinButton, {width:300, height: 40}]}>
               <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{someText}</Text>
             </View>
@@ -94,4 +98,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps, {doesRoomExist, })(JoinScreen);
+export default connect(mapStateToProps, {joinRoom, })(JoinScreen);

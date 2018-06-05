@@ -15,14 +15,38 @@ class HomeScreen extends React.Component {
 
   shouldComponentUpdate()
   {
-    if (this.doesRoomExistt())
+    if (this.checkPropRoomExists())
     {
-      const resetAction = StackActions.reset({
-        index: 0, actions: [
-          NavigationActions.navigate({ routeName: 'Join' })
-        ],
-      });
-      this.props.navigation.dispatch(resetAction);
+      if (this.checkPropRoomAnnonymous())
+      {
+        const resetAction = StackActions.reset({
+          index: 0, actions: [
+            NavigationActions.navigate({ routeName: 'Join' })
+          ],
+        });
+        this.props.navigation.dispatch(resetAction);
+      }
+      else
+      {
+        if (this.checkPropIsLoggedIn())
+        {
+          const resetAction = StackActions.reset({
+            index: 0, actions: [
+              NavigationActions.navigate({ routeName: 'Join' })
+            ],
+          });
+          this.props.navigation.dispatch(resetAction);
+        }
+        else
+        {
+          const resetAction = StackActions.reset({
+            index: 0, actions: [
+              NavigationActions.navigate({ routeName: 'Login' })
+            ],
+          });
+          this.props.navigation.dispatch(resetAction);
+        }
+      }
       return false
     }
     else
@@ -40,8 +64,16 @@ class HomeScreen extends React.Component {
     return this.props.language.language;
   }
 
-  doesRoomExistt() {
+  checkPropRoomExists() {
     return this.props.socket.roomExists;
+  }
+
+  checkPropRoomAnnonymous() {
+    return this.props.socket.annonymous;
+  }
+
+  checkPropIsLoggedIn() {
+    return this.props.socket.loggedIn;
   }
 
   handleRoomJoinClick() {
