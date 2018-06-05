@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
+import {doesRoomExist} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -12,6 +13,24 @@ class HomeScreen extends React.Component {
     this.state = {text: ''};
   }
 
+  shouldComponentUpdate()
+  {
+    if (this.doesRoomExistt())
+    {
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Join' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+      return false
+    }
+    else
+    {
+      return true;
+    }
+  }
+
   static navigationOptions = {
       title: 'Home',
       header: null,
@@ -19,6 +38,14 @@ class HomeScreen extends React.Component {
 
   selectedLanguage() {
     return this.props.language.language;
+  }
+
+  doesRoomExistt() {
+    return this.props.socket.roomExists;
+  }
+
+  handleRoomJoinClick() {
+    this.props.doesRoomExist(this.state.text)
   }
 
   render() {
@@ -44,7 +71,7 @@ class HomeScreen extends React.Component {
             onChangeText={(text) => this.setState({text})}
           />
           <TouchableNativeFeedback
-            onPress={() => this.props.navigation.navigate('Join')}>
+            onPress={() => this.handleRoomJoinClick()}>
             <View style={[styleGeneral.joinButton, {width:300, height: 40}]}>
               <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.joinButton}</Text>
             </View>
@@ -67,7 +94,7 @@ class HomeScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { language: state.language };
+  return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps)(HomeScreen);
+export default connect(mapStateToProps, {doesRoomExist, })(HomeScreen);
