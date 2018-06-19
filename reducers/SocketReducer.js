@@ -14,6 +14,7 @@ const initialState = {
   answers: [],
   roomJoinedStatus: false,
   backToHome: false,
+  gameStarted: false,
 };
 
 const SocketReducer = (state = initialState, action) => {
@@ -74,7 +75,7 @@ const SocketReducer = (state = initialState, action) => {
     case messageTypes.roomQuestions:
       if (action.payload.roomId == state.roomId)
       {
-         return { ...state, answers: action.payload.qi};
+         return { ...state, answers: action.payload.qi, gameStarted: true};
       }
     case messageTypes.roomJoined:
         if (action.payload.status)

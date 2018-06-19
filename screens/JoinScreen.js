@@ -32,6 +32,7 @@ class JoinScreen extends React.Component {
 
   shouldComponentUpdate(){
     if(this.checkPropRoomJoinedStatus()){
+      this.props.socket.gameStarted = false;
       const resetAction = StackActions.reset({
         index: 0, actions: [
           NavigationActions.navigate({ routeName: 'WaitingGame' })

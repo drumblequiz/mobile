@@ -20,8 +20,22 @@ class WaitingGameScreen extends React.Component {
     return this.props.language.language;
   }
 
+  gameStarted()
+  {
+    return this.props.socket.gameStarted;
+  }
+
   render() {
     const lang = this.selectedLanguage();
+    if (this.gameStarted())
+    {
+        const resetAction = StackActions.reset({
+          index: 0, actions: [
+            NavigationActions.navigate({ routeName: 'Answer' })
+          ],
+        });
+        this.props.navigation.dispatch(resetAction);
+    }
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
         <View style={{flex:8, alignItems :'center', justifyContent:'center'}}>
