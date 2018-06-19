@@ -13,6 +13,7 @@ import Register from '../screens/RegisterScreen.js';
 import Score from '../screens/ScoreScreen.js';
 import WaitingAnswer from '../screens/WaitingAnswerScreen.js';
 import Answer from '../screens/AnswerScreen.js';
+import Truth from '../screens/TruthScreen.js';
 
 export const AppNavigator = createStackNavigator({
   Home: { screen: Home },
@@ -24,9 +25,10 @@ export const AppNavigator = createStackNavigator({
   Score: {screen: Score},
   WaitingAnswer: {screen: WaitingAnswer},
   Answer: {screen: Answer},
+  Truth: {screen: Truth},
 },
 {
-  initialRouteName: 'Answer',
+  initialRouteName: 'Home',
   cardStyle: {
     backgroundColor : '#212121',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
