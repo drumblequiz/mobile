@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import styleGeneral from '../styles/general.js';
 
-class WaitingGameScreen extends React.Component {
+class WaitingAnswerScreen extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -40,4 +40,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps)(WaitingGameScreen);
+export default connect(mapStateToProps)(WaitingAnswerScreen);
