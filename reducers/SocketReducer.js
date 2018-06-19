@@ -13,6 +13,7 @@ const initialState = {
   ranking: "",
   answers: [],
   roomJoinedStatus: false,
+  backToHome: false,
 };
 
 const SocketReducer = (state = initialState, action) => {
@@ -76,7 +77,14 @@ const SocketReducer = (state = initialState, action) => {
          return { ...state, answers: action.payload.qi};
       }
     case messageTypes.roomJoined:
-         return { ...state, roomJoinedStatus: action.payload.status, errorMsg: action.payload.error};
+        if (action.payload.status)
+        {
+            return { ...state, roomJoinedStatus: action.payload.status, errorMsg: action.payload.error};
+        }
+        else
+        {
+            return { ...state, roomJoinedStatus: action.payload.status, errorMsg: action.payload.error, backToHome: true};
+        }
     default:
       return state;
   }

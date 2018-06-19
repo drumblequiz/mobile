@@ -28,6 +28,7 @@ class LoginScreen extends React.Component {
   }
 
   handleNoHashClick() {
+    this.props.socket.registerStatus = "inactive";
     this.props.navigation.navigate('Register');
   }
 
@@ -37,6 +38,7 @@ class LoginScreen extends React.Component {
 
   shouldComponentUpdate(){
     if(this.checkProploggedIn()){
+      this.props.socket.roomJoinedStatus = false;
       const resetAction = StackActions.reset({
         index: 0, actions: [
           NavigationActions.navigate({ routeName: 'Join' })

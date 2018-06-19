@@ -40,6 +40,18 @@ class JoinScreen extends React.Component {
       this.props.navigation.dispatch(resetAction);
       return false;
     }
+    else if (this.props.socket.backToHome)
+    {
+        this.props.socket.backToHome = false;
+        this.props.socket.roomId = "";
+        const resetAction = StackActions.reset({
+          index: 0, actions: [
+            NavigationActions.navigate({ routeName: 'Home' })
+          ],
+        });
+        this.props.navigation.dispatch(resetAction);
+        return false;
+    }
     return true;
   }
 

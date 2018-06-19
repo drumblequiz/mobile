@@ -19,6 +19,7 @@ class HomeScreen extends React.Component {
     {
       if (this.checkPropRoomAnnonymous())
       {
+        this.props.socket.roomJoinedStatus = false;
         const resetAction = StackActions.reset({
           index: 0, actions: [
             NavigationActions.navigate({ routeName: 'Join' })
@@ -30,6 +31,7 @@ class HomeScreen extends React.Component {
       {
         if (this.checkPropIsLoggedIn())
         {
+          this.props.socket.roomJoinedStatus = false;
           const resetAction = StackActions.reset({
             index: 0, actions: [
               NavigationActions.navigate({ routeName: 'Join' })
