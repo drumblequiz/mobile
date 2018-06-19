@@ -4,7 +4,7 @@
   "displayName" : "DISPLAY NAME",
   "waitingForGame" : "Waiting For Game",
   "loginHash" : "LOGIN HASH",
-  "loginButton" : "PLEASE LOGIN",
+  "loginButton" : "LOGIN",
   "noHashCodeButton" : "DON'T HAVE HASH",
   "registerButton" : "REGISTER",
   "registerLabel" : "E-MAIL",

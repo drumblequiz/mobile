@@ -4,7 +4,7 @@
   "displayName" : "VARDAS",
   "waitingForGame" : "Laukiama pradžios",
   "loginHash" : "PRISIJUNGIMO KODAS",
-  "loginButton" : " PRAŠOME PRISIJUNGTI",
+  "loginButton" : "PRISIJUNGTI",
   "noHashCodeButton" : "NETURIU KODO",
   "registerButton" : "REGISTRUOTIS",
   "registerLabel" : "EL-PAŠTAS",
