@@ -8,4 +8,6 @@
   "noHashCodeButton" : "DON'T HAVE HASH",
   "registerButton" : "REGISTER",
   "registerLabel" : "E-MAIL",
+  "scoreLabel" : "Congratulations! You placed",
+  "goBackButton" : "BACK TO MENU",
 }

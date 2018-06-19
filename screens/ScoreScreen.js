@@ -20,16 +20,23 @@ class WaitingGameScreen extends React.Component {
     return this.props.language.language;
   }
 
+  handleGoBackClick() {
+
+  }
+
   render() {
     const lang = this.selectedLanguage();
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
-        <View style={{flex:8, alignItems :'center', justifyContent:'center'}}>
-          <Text style={[{fontSize: 40, fontWeight: 'bold', textAlign: 'center', width:300, height: 120}]}>{lang.waitingForGame}</Text>
-          <Image
-            width={80}
-            source={require('../images/loading.gif')}
-          />
+        <View style={{ alignItems :'center', justifyContent:'center'}}>
+          <Text style={[{fontSize: 40, fontWeight: 'bold', textAlign: 'center', }]}>{lang.scoreLabel}</Text>
+          <Text style={[{fontSize: 40, fontWeight: 'bold', textAlign: 'center', width:300, height: 80}]}>10</Text>
+          <TouchableNativeFeedback
+            onPress={() => this.handleGoBackClick()}>
+            <View style={[styleGeneral.joinButton, {width:300, height: 40}]}>
+              <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.goBackButton}</Text>
+            </View>
+          </TouchableNativeFeedback>
         </View>
       </SafeAreaView>
     );
