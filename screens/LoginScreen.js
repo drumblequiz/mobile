@@ -4,6 +4,7 @@ import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation'
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
 import {doesRoomExist} from '../actions/network.js';
+import { logIn } from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -20,6 +21,31 @@ class LoginScreen extends React.Component {
 
   selectedLanguage() {
     return this.props.language.language;
+  }
+
+  checkProploggedIn() {
+    return this.props.socket.loggedIn;
+  }
+
+  handleNoHashClick() {
+    this.props.navigation.navigate('Register');
+  }
+
+  handleLogInClick() {
+    this.props.logIn(this.state.text)
+  }
+
+  shouldComponentUpdate(){
+    if(this.checkProploggedIn()){
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Join' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+      return false;
+    }
+    return true;
   }
 
   render() {
@@ -44,13 +70,13 @@ class LoginScreen extends React.Component {
             onChangeText={(text) => this.setState({text})}
           />
           <TouchableNativeFeedback
-            onPress={() => {}}>
+            onPress={() => this.handleLogInClick()}>
             <View marginBottom={10} style={[styleGeneral.joinButton, {width:300, height: 40}]}>
               <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.loginButton}</Text>
             </View>
           </TouchableNativeFeedback>
           <TouchableNativeFeedback
-            onPress={() => {}}>
+            onPress={() => this.handleNoHashClick()}>
             <View style={[styleGeneral.joinButton, {width:300, height: 40}]}>
               <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.noHashCodeButton}</Text>
             </View>
@@ -77,4 +103,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps)(LoginScreen);
+export default connect(mapStateToProps, {logIn, })(LoginScreen);

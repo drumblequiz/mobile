@@ -8,7 +8,7 @@ const initialState = {
   roomExists: false,
   annonymous: true,
   errorMsg: "",
-  registerStatus: "",
+  registerStatus: "inactive", // inactive|ok|error
   correctAnswArr: [],
   ranking: "",
   answers: [],
@@ -37,7 +37,7 @@ const SocketReducer = (state = initialState, action) => {
       {
         if (action.payload.status == "OK")
         {
-          return { ...state, annonymous: false, roomExists: true };
+          return { ...state, annonymous: false, roomExists: true, roomId: action.payload.id};
         }
         else if (action.payload.status == "inactive")
         {
@@ -51,11 +51,11 @@ const SocketReducer = (state = initialState, action) => {
     case messageTypes.registerResponse:
       if (action.payload == false)
       {
-         return { ...state,  registerStatus: "Wrong Email, please try again."};
+         return { ...state,  registerStatus: "error"};
       }
       else if (action.payload == true)
       {
-         return { ...state,  registerStatus: "Registration successful, check you email for hash."};
+         return { ...state,  registerStatus: "ok"};
       }
     case messageTypes.logInInfo:
     if (action.payload.success == false)

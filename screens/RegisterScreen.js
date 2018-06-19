@@ -3,7 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import {doesRoomExist} from '../actions/network.js';
+import {register} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -18,8 +18,28 @@ class RegisterScreen extends React.Component {
       header: null,
   };
 
+  handleRegisterClick() {
+    this.props.register(this.state.text);
+  }
+
+  checkPropRegisterStatus() {
+    return this.props.socket.registerStatus;
+  }
+
   selectedLanguage() {
     return this.props.language.language;
+  }
+
+  shouldComponentUpdate(){
+    if(this.checkPropRegisterStatus() == 'ok'){
+      this.props.navigation.navigate('Login');
+      return false;
+    }
+    else if (this.checkPropRegisterStatus() == 'error')
+    {
+        // show error msg
+    }
+    return true;
   }
 
   render() {
@@ -44,7 +64,7 @@ class RegisterScreen extends React.Component {
             onChangeText={(text) => this.setState({text})}
           />
           <TouchableNativeFeedback
-            onPress={() => {}}>
+            onPress={() => this.handleRegisterClick()}>
             <View style={[styleGeneral.joinButton, {width:300, height: 40}]}>
               <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.registerButton}</Text>
             </View>
@@ -71,4 +91,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps)(RegisterScreen);
+export default connect(mapStateToProps, {register, })(RegisterScreen);
