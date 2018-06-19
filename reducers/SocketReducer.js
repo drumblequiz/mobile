@@ -22,7 +22,7 @@ const SocketReducer = (state = initialState, action) => {
       {
         if (action.payload.status == "OK")
         {
-          return { ...state, annonymous: true, roomExists: true };
+          return { ...state, annonymous: true, roomExists: true, roomId: action.payload.id };
         }
         else if (action.payload.status == "inactive")
         {

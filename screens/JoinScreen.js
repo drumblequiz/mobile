@@ -22,8 +22,8 @@ class JoinScreen extends React.Component {
     return this.props.language.language;
   }
 
-  checkPropRoomExists() {
-    return this.props.socket.roomExists;
+  checkPropRoomJoinedStatus() {
+    return this.props.socket.roomJoinedStatus;
   }
 
   handleNameEnterClick() {
@@ -31,10 +31,10 @@ class JoinScreen extends React.Component {
   }
 
   shouldComponentUpdate(){
-    if(this.doesRoomExistt()){
+    if(this.checkPropRoomJoinedStatus()){
       const resetAction = StackActions.reset({
         index: 0, actions: [
-          NavigationActions.navigate({ routeName: 'Home' })
+          NavigationActions.navigate({ routeName: 'WaitingGame' })
         ],
       });
       this.props.navigation.dispatch(resetAction);
@@ -45,13 +45,6 @@ class JoinScreen extends React.Component {
 
   render() {
     const lang = this.selectedLanguage();
-    const exists = this.doesRoomExistt();
-    console.log(exists);
-    if(exists){
-      someText='gavom'
-    } else {
-      someText='negavom'
-    }
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
         <View style={{flex:10, alignItems :'center', justifyContent:'center'}}>
@@ -72,9 +65,9 @@ class JoinScreen extends React.Component {
             onChangeText={(text) => this.setState({text})}
           />
           <TouchableNativeFeedback
-            onPress={() => this.props.handleNameEnterClick()}>
+            onPress={() => this.handleNameEnterClick()}>
             <View style={[styleGeneral.joinButton, {width:300, height: 40}]}>
-              <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{someText}</Text>
+              <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.joinButton}</Text>
             </View>
           </TouchableNativeFeedback>
         </View>
