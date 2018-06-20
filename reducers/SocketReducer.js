@@ -18,6 +18,7 @@ const initialState = {
   timer: 0,
   nextQuestion: false,
   showScoreStatus: "inactive", // inactive|ok|error
+  serverTime: new Date(),
 };
 
 const SocketReducer = (state = initialState, action) => {
@@ -93,6 +94,11 @@ const SocketReducer = (state = initialState, action) => {
         if (action.payload.roomId == state.roomId)
         {
            return { ...state, showScoreStatus: "ok"};
+        }
+      case messageTypes.serverTime:
+        if (action.payload.roomId == state.roomId)
+        {
+           return { ...state, serverTime: action.payload.time};
         }
       case 'SET_ROOM_JOINED':
         return { ...state, roomJoinedStatus: action.payload.status};

@@ -13,7 +13,7 @@ export const messageTypes = [
   'roomJoined',
   'select',
   'showFinalScore',
-
+  'serverTime',
 ].reduce( ( accum, msg ) =>
   {
     accum[ msg ] = msg;

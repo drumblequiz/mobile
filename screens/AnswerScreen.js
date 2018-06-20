@@ -10,7 +10,7 @@ import styleGeneral from '../styles/general.js';
 class AnswerScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.props.socket.timer = Math.ceil((new Date(this.props.socket.answers[0].endtime).getTime() - new Date().getTime())/1000)+3;
+    this.props.socket.timer = Math.floor((new Date(this.props.socket.answers[0].endtime).getTime() - new Date(this.props.socket.serverTime).getTime())/1000);
     this.myInterval = setInterval(() => {
       if (this.props.socket.timer <= 0) {
         clearInterval(this.myInterval);
