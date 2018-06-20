@@ -9,6 +9,23 @@ import styleGeneral from '../styles/general.js';
 class WaitingAnswerScreen extends React.Component {
   constructor(props) {
     super(props);
+
+    this.myInterval = setInterval(() => {
+      if (this.props.socket.timer <= 0) {
+        clearInterval(this.myInterval);
+        this.props.socket.nextQuestion = false;
+        const resetAction = StackActions.reset({
+          index: 0, actions: [
+            NavigationActions.navigate({ routeName: 'Truth' })
+          ],
+        });
+        this.props.navigation.dispatch(resetAction);
+      } else {
+        this.props.socket.timer = this.props.socket.timer-1;
+        this.forceUpdate();
+      }
+    }, 1000)
+
   }
 
   static navigationOptions = {

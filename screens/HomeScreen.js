@@ -3,7 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import {doesRoomExist} from '../actions/network.js';
+import {doesRoomExist, roomJoinedChanged} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -17,9 +17,11 @@ class HomeScreen extends React.Component {
   {
     if (this.checkPropRoomExists())
     {
+      this.props.socket.roomExists = false;
       if (this.checkPropRoomAnnonymous())
       {
         this.props.socket.roomJoinedStatus = false;
+        this.props.roomJoinedChanged(false);
         const resetAction = StackActions.reset({
           index: 0, actions: [
             NavigationActions.navigate({ routeName: 'Join' })
@@ -32,6 +34,7 @@ class HomeScreen extends React.Component {
         if (this.checkPropIsLoggedIn())
         {
           this.props.socket.roomJoinedStatus = false;
+          this.props.roomJoinedChanged(false);
           const resetAction = StackActions.reset({
             index: 0, actions: [
               NavigationActions.navigate({ routeName: 'Join' })
@@ -84,7 +87,6 @@ class HomeScreen extends React.Component {
 
   render() {
     const lang = this.selectedLanguage();
-    console.log(lang);
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
         <View style={{flex:10, alignItems :'center', justifyContent:'center'}}>
@@ -131,4 +133,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps, {doesRoomExist, })(HomeScreen);
+export default connect(mapStateToProps, {doesRoomExist, roomJoinedChanged, })(HomeScreen);

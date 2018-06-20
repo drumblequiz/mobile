@@ -41,3 +41,10 @@ export function select( ans ) {
     emit(messageTypes.select, ans)
   }
 }
+
+export const roomJoinedChanged = (status) => {
+  return {
+    type: 'SET_ROOM_JOINED',
+    payload: {status}
+  };
+};

@@ -10,6 +10,23 @@ import styleGeneral from '../styles/general.js';
 class AnswerScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.props.socket.timer = Math.ceil((new Date(this.props.socket.answers[0].endtime).getTime() - new Date().getTime())/1000)+3;
+    console.log(this.props.socket.roomJoinedStatus);
+    this.myInterval = setInterval(() => {
+      if (this.props.socket.timer <= 0) {
+        clearInterval(this.myInterval);
+        this.props.socket.nextQuestion = false;
+        const resetAction = StackActions.reset({
+          index: 0, actions: [
+            NavigationActions.navigate({ routeName: 'Truth' })
+          ],
+        });
+        this.props.navigation.dispatch(resetAction);
+      } else {
+        this.props.socket.timer = this.props.socket.timer-1;
+        this.forceUpdate();
+      }
+    }, 1000)
   }
 
   static navigationOptions = {
@@ -31,14 +48,20 @@ class AnswerScreen extends React.Component {
 
   handleChoiceClick(numb)
   {
-    this.props.socket.answers.sort(compare);
+    clearInterval(this.myInterval);
+    this.props.socket.answers.sort(this.compare);
     this.props.select(this.props.socket.answers[numb]);
     const resetAction = StackActions.reset({
       index: 0, actions: [
-        NavigationActions.navigate({ routeName: 'Truth' })
+        NavigationActions.navigate({ routeName: 'WaitingAnswer' })
       ],
     });
     this.props.navigation.dispatch(resetAction);
+  }
+
+  getTimer()
+  {
+    return this.props.socket.timer;
   }
 
   render() {
@@ -47,7 +70,7 @@ class AnswerScreen extends React.Component {
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
         <View style={{ flex:3, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap',}}>
           <Image width={80} source={require('../images/clock.png')}/>
-          <Text style={[{fontSize: 70, fontWeight: 'bold', textAlign: 'center'}]}>30</Text>
+          <Text style={[{fontSize: 70, fontWeight: 'bold', textAlign: 'center'}]}>{this.getTimer()}</Text>
         </View>
         <View style={{flex:5, alignItems :'center', justifyContent:'center', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap',}}>
           <TouchableOpacity onPress={() => this.handleChoiceClick(1)}>

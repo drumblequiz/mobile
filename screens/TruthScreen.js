@@ -25,6 +25,23 @@ class TruthScreen extends React.Component {
   }
 
   render() {
+    if(this.props.socket.nextQuestion){
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Answer' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+    }
+    if(this.props.socket.showScoreStatus == "ok"){
+      this.props.socket.showScoreStatus = "inactive";
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Score' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+    }
     const lang = this.selectedLanguage();
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
