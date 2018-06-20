@@ -21,7 +21,7 @@ class AnswerScreen extends React.Component {
     return this.props.language.language;
   }
 
-  function compare(a,b) {
+  compare(a,b) {
     if (a.AnswerId < b.AnswerId)
       return -1;
     if (a.AnswerId > b.AnswerId)
