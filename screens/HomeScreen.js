@@ -3,7 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import {doesRoomExist, roomJoinedChanged} from '../actions/network.js';
+import {doesRoomExist, roomJoinedChanged, roomExistsChanged} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -17,10 +17,9 @@ class HomeScreen extends React.Component {
   {
     if (this.checkPropRoomExists())
     {
-      this.props.socket.roomExists = false;
+      this.props.roomExistsChanged(false);
       if (this.checkPropRoomAnnonymous())
       {
-        this.props.socket.roomJoinedStatus = false;
         this.props.roomJoinedChanged(false);
         const resetAction = StackActions.reset({
           index: 0, actions: [
@@ -33,7 +32,6 @@ class HomeScreen extends React.Component {
       {
         if (this.checkPropIsLoggedIn())
         {
-          this.props.socket.roomJoinedStatus = false;
           this.props.roomJoinedChanged(false);
           const resetAction = StackActions.reset({
             index: 0, actions: [
@@ -133,4 +131,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps, {doesRoomExist, roomJoinedChanged, })(HomeScreen);
+export default connect(mapStateToProps, {doesRoomExist, roomJoinedChanged, roomExistsChanged, })(HomeScreen);

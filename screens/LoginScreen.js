@@ -3,8 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import {doesRoomExist, roomJoinedChanged} from '../actions/network.js';
-import { logIn } from '../actions/network.js';
+import {logIn, roomJoinedChanged, registerStatusChanged} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -28,7 +27,7 @@ class LoginScreen extends React.Component {
   }
 
   handleNoHashClick() {
-    this.props.socket.registerStatus = "inactive";
+    this.props.registerStatusChanged("inactive");
     this.props.navigation.navigate('Register');
   }
 
@@ -38,7 +37,6 @@ class LoginScreen extends React.Component {
 
   shouldComponentUpdate(){
     if(this.checkProploggedIn()){
-      this.props.socket.roomJoinedStatus = false;
       this.props.roomJoinedChanged(false);
       const resetAction = StackActions.reset({
         index: 0, actions: [
@@ -106,4 +104,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps, {logIn,roomJoinedChanged, })(LoginScreen);
+export default connect(mapStateToProps, {logIn,roomJoinedChanged, registerStatusChanged })(LoginScreen);

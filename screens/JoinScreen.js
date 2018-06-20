@@ -3,7 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import { joinRoom, roomJoinedChanged} from '../actions/network.js';
+import { joinRoom, roomJoinedChanged, gameStartedChanged, backToHomeChanged, roomIdChanged, roomExistsChanged} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -31,13 +31,9 @@ class JoinScreen extends React.Component {
   }
 
   render() {
-    console.log("STATUS");
-    console.log(this.props.socket.roomJoinedStatus);
     if(this.props.socket.roomJoinedStatus){
-      this.props.socket.gameStarted = false;
+      this.props.gameStartedChanged(false);
       this.props.roomJoinedChanged(false);
-      console.log(this.checkPropRoomJoinedStatus());
-      console.log(this.props.socket.roomJoinedStatus);
       const resetAction = StackActions.reset({
         index: 0, actions: [
           NavigationActions.navigate({ routeName: 'WaitingGame' })
@@ -47,9 +43,9 @@ class JoinScreen extends React.Component {
     }
     if (this.props.socket.backToHome)
     {
-        this.props.socket.backToHome = false;
-        this.props.socket.roomId = "";
-        this.props.socket.roomExists = false;
+        this.props.backToHomeChanged(false);
+        this.props.roomIdChanged("");
+        this.props.roomExistsChanged(false);
         const resetAction = StackActions.reset({
           index: 0, actions: [
             NavigationActions.navigate({ routeName: 'Home' })
@@ -104,4 +100,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps, {joinRoom,roomJoinedChanged })(JoinScreen);
+export default connect(mapStateToProps, {joinRoom,roomJoinedChanged, gameStartedChanged, backToHomeChanged, roomIdChanged, roomExistsChanged, })(JoinScreen);

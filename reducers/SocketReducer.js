@@ -81,8 +81,6 @@ const SocketReducer = (state = initialState, action) => {
          return { ...state, answers: action.payload.qi, gameStarted: true, nextQuestion: true};
       }
     case messageTypes.roomJoined:
-        console.log("loool");
-        console.log(state.roomJoinedStatus);
         if (action.payload.status)
         {
             return { ...state, roomJoinedStatus: action.payload.status, errorMsg: action.payload.error};
@@ -97,8 +95,21 @@ const SocketReducer = (state = initialState, action) => {
            return { ...state, showScoreStatus: "ok"};
         }
       case 'SET_ROOM_JOINED':
-        console.log("does it work??");
-        return { ...state, roomJoinedStatus: false};
+        return { ...state, roomJoinedStatus: action.payload.status};
+      case 'SET_NEXT_QUESTION':
+        return { ...state, nextQuestion: action.payload.status};
+      case 'SET_ROOM_EXISTS':
+        return { ...state, roomExists: action.payload.status};
+      case 'SET_GAME_STARTED':
+        return { ...state, gameStarted: action.payload.status};
+      case 'SET_BACK_TO_HOME':
+        return { ...state, backToHome: action.payload.status};
+      case 'SET_ROOM_ID':
+        return { ...state, roomId: action.payload.status};
+      case 'SET_REGISTER_STATUS':
+        return { ...state, registerStatus: action.payload.status};
+      case 'SET_SHOW_SCORE_STATUS':
+        return { ...state, showScoreStatus: action.payload.status};
     default:
       return state;
   }

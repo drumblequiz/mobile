@@ -3,6 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
+import {roomIdChanged, roomExistsChanged} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -21,8 +22,8 @@ class ScoreScreen extends React.Component {
   }
 
   handleGoBackClick() {
-      this.props.socket.roomId = "";
-      this.props.socket.roomExists = false;
+      this.props.roomIdChanged("");
+      this.props.roomExistsChanged(false);
       const resetAction = StackActions.reset({
         index: 0, actions: [
           NavigationActions.navigate({ routeName: 'Home' })
@@ -54,4 +55,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps)(ScoreScreen);
+export default connect(mapStateToProps, {roomIdChanged, roomExistsChanged, })(ScoreScreen);

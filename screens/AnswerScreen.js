@@ -3,7 +3,7 @@ import { AppRegistry, TouchableOpacity, TextInput, View, Text} from 'react-nativ
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import { select } from '../actions/network.js';
+import { select, nextQuestionChanged } from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -11,11 +11,10 @@ class AnswerScreen extends React.Component {
   constructor(props) {
     super(props);
     this.props.socket.timer = Math.ceil((new Date(this.props.socket.answers[0].endtime).getTime() - new Date().getTime())/1000)+3;
-    console.log(this.props.socket.roomJoinedStatus);
     this.myInterval = setInterval(() => {
       if (this.props.socket.timer <= 0) {
         clearInterval(this.myInterval);
-        this.props.socket.nextQuestion = false;
+        this.props.nextQuestionChanged(false);
         const resetAction = StackActions.reset({
           index: 0, actions: [
             NavigationActions.navigate({ routeName: 'Truth' })
@@ -103,4 +102,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps, {select, })(AnswerScreen);
+export default connect(mapStateToProps, {select, nextQuestionChanged, })(AnswerScreen);

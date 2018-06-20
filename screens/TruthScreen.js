@@ -3,6 +3,9 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
+import {showScoreStatusChanged} from '../actions/network.js';
+
+
 
 import styleGeneral from '../styles/general.js';
 
@@ -34,7 +37,7 @@ class TruthScreen extends React.Component {
       this.props.navigation.dispatch(resetAction);
     }
     if(this.props.socket.showScoreStatus == "ok"){
-      this.props.socket.showScoreStatus = "inactive";
+      this.props.showScoreStatusChanged("inactive");
       const resetAction = StackActions.reset({
         index: 0, actions: [
           NavigationActions.navigate({ routeName: 'Score' })
@@ -57,4 +60,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps)(TruthScreen);
+export default connect(mapStateToProps, {showScoreStatusChanged, })(TruthScreen);

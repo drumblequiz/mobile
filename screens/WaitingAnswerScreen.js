@@ -3,6 +3,8 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
+import {nextQuestionChanged} from '../actions/network.js';
+
 
 import styleGeneral from '../styles/general.js';
 
@@ -13,7 +15,7 @@ class WaitingAnswerScreen extends React.Component {
     this.myInterval = setInterval(() => {
       if (this.props.socket.timer <= 0) {
         clearInterval(this.myInterval);
-        this.props.socket.nextQuestion = false;
+        this.props.nextQuestionChanged(false);
         const resetAction = StackActions.reset({
           index: 0, actions: [
             NavigationActions.navigate({ routeName: 'Truth' })
@@ -57,4 +59,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps)(WaitingAnswerScreen);
+export default connect(mapStateToProps, {nextQuestionChanged, })(WaitingAnswerScreen);
