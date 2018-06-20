@@ -1,5 +1,6 @@
 import React from 'react';
 import { addNavigationHelpers, createStackNavigator } from 'react-navigation';
+import { fromLeft } from 'react-navigation-transitions';
 import { Platform, StatusBar } from 'react-native';
 import { createStore, combineReducers } from 'redux';
 import { connect } from 'react-redux';
@@ -14,6 +15,8 @@ import Score from '../screens/ScoreScreen.js';
 import WaitingAnswer from '../screens/WaitingAnswerScreen.js';
 import Answer from '../screens/AnswerScreen.js';
 import Truth from '../screens/TruthScreen.js';
+import LanguageSettings from '../screens/LanguageSettingsScreen.js';
+import AboutSettings from '../screens/AboutSettingsScreen.js';
 
 export const AppNavigator = createStackNavigator({
   Home: { screen: Home },
@@ -26,8 +29,11 @@ export const AppNavigator = createStackNavigator({
   WaitingAnswer: {screen: WaitingAnswer},
   Answer: {screen: Answer},
   Truth: {screen: Truth},
+  LanguageSettings: {screen: LanguageSettings},
+  AboutSettings: {screen: AboutSettings},
 },
 {
+  transitionConfig: () => fromLeft(150),
   initialRouteName: 'Home',
   cardStyle: {
     backgroundColor : '#212121',
