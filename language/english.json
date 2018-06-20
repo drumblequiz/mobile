@@ -8,7 +8,7 @@
   "noHashCodeButton" : "DON'T HAVE HASH",
   "registerButton" : "REGISTER",
   "registerLabel" : "E-MAIL",
-  "scoreLabel" : "Congratulations! You placed",
+  "scoreLabel" : "Congratulations! Your place is ",
   "goBackButton" : "BACK TO MENU",
   "waitingForAnswer" : "Were you correct???",
   "settings" : "Settings",
@@ -18,4 +18,5 @@
   "languageName" : "English",
   "english" : "English",
   "lithuanian" : "Lithuanian",
+  "aboutText" : "Mobile adaptation to Drumblequiz web application\n\nOriginally created by Jonas Motiejauskas and Matas Ramanauskas\n\nSpecifically for UCLL mobile course 2018",
 }

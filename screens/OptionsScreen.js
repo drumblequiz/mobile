@@ -42,15 +42,20 @@ class OptionsScreen extends React.Component {
     return this.props.language.language;
   }
 
+  selectedTheme() {
+    return this.props.theme;
+  }
+
   render() {
     const lang = this.selectedLanguage();
+    const theme = this.selectedTheme();
     return (
       <SafeAreaView style={{ backgroundColor: '#EFEFEF',flex:1, flexDirection: 'column'}}>
         <View>
           <FlatList marginTop={7} style={[{borderStyle: 'solid', borderTopWidth: 0.4, borderBottomWidth: 0.4, borderColor: '#BBBBBB',}]}
             data={[ {key: 'AboutSettings', text: lang.about},
                     {key: 'LanguageSettings', text: lang.language, selection: lang.languageName},
-                    {key: 'ThemeSettings', text: lang.interfaceTheme, selection: 'Dark UI'}]}
+                    {key: 'ThemeSettings', text: lang.interfaceTheme, selection: theme.themeName}]}
 
             renderItem={({item}) =>
               <TouchableOpacity  onPress={() => this.handleSettingClick(item.key)}>
@@ -74,7 +79,7 @@ class OptionsScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { language: state.language};
+  return { language: state.language, theme: state.theme};
 };
 
 export default connect(mapStateToProps)(OptionsScreen);

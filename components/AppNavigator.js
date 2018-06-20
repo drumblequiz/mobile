@@ -17,6 +17,7 @@ import Answer from '../screens/AnswerScreen.js';
 import Truth from '../screens/TruthScreen.js';
 import LanguageSettings from '../screens/LanguageSettingsScreen.js';
 import AboutSettings from '../screens/AboutSettingsScreen.js';
+import ThemeSettings from '../screens/ThemeSettingsScreen.js';
 
 export const AppNavigator = createStackNavigator({
   Home: { screen: Home },
@@ -31,6 +32,7 @@ export const AppNavigator = createStackNavigator({
   Truth: {screen: Truth},
   LanguageSettings: {screen: LanguageSettings},
   AboutSettings: {screen: AboutSettings},
+  ThemeSettings: {screen: ThemeSettings},
 },
 {
   transitionConfig: () => fromLeft(150),

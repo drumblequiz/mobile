@@ -46,8 +46,8 @@ class AboutSettingsScreen extends React.Component {
     const lang = this.selectedLanguage();
     return (
       <SafeAreaView style={{ backgroundColor: '#EFEFEF',flex:1, flexDirection: 'column'}}>
-        <View>
-          <Text style={{fontSize: 12, color: '#555555'}}>Hi</Text>
+        <View marginTop={7} style={[{borderStyle: 'solid', borderTopWidth: 0.4, borderBottomWidth: 0.4, borderColor: '#BBBBBB',backgroundColor: '#FFFFFF'}]}>
+          <Text style={{fontSize: 18, padding: 30,}}>{lang.aboutText}</Text>
         </View>
       </SafeAreaView>
     );

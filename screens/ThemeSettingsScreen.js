@@ -3,20 +3,20 @@ import { Platform, AppRegistry, TouchableOpacity, View, StatusBar, FlatList, Tex
 import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { languageChanged } from '../actions/LanguageChangeAction.js';
-import ltLang from '../language/lithuanian.json';
-import enLang from '../language/english.json';
+import { themeChanged } from '../actions/ThemeChangeAction.js';
+import darkUI from '../styles/darkUI.js';
+import lightUI from '../styles/lightUI.js';
 
 if (Platform.OS === 'android') {SafeAreaView.setStatusBarHeight(0);}
 
-class LanguageSettingsScreen extends React.Component {
+class ThemeSettingsScreen extends React.Component {
 
   state = {
-    selected: this.props.language.language.languageName
+    selected: this.props.theme.themeName
   }
 
   static navigationOptions  = ({ navigation }) => ({
-    title: 'Language',
+    title: 'Theme',
     headerStyle: {
       backgroundColor: '#EFEFEF',
       elevation: 0,
@@ -42,11 +42,11 @@ class LanguageSettingsScreen extends React.Component {
     );
   };
 
-  onSelectLanguage(key, language) {
+  onSelectTheme(key, theme) {
     this.setState(state => {
         return { selected: key };
       });
-    this.props.languageChanged(language);
+    this.props.themeChanged(theme);
   }
 
   selectedLanguage() {
@@ -59,7 +59,7 @@ class LanguageSettingsScreen extends React.Component {
     console.log(this.state.selected)
     console.log(item.key)
     return (
-    <TouchableOpacity style={[{flexDirection:'row',}]} onPress={() => this.onSelectLanguage(item.key, item.language)}>
+    <TouchableOpacity style={[{flexDirection:'row',}]} onPress={() => this.onSelectTheme(item.key, item.theme)}>
       <View style={[{flex: 10, padding: 30, justifyContent:'center',backgroundColor: '#FFFFFF',height: 60}]}>
         {isSelectedUser ?
           <Text style={{fontSize: 17, color:"#49A9FF"}}>{item.text}</Text>
@@ -77,8 +77,9 @@ class LanguageSettingsScreen extends React.Component {
       <SafeAreaView style={{ backgroundColor: '#EFEFEF', flex:1, flexDirection: 'column'}}>
         <View>
           <FlatList marginTop={7} style={[{borderStyle: 'solid', borderTopWidth: 0.4, borderBottomWidth: 0.4, borderColor: '#BBBBBB',}]}
-            data={[ {key: 'English', text: lang.english, language: enLang},
-                    {key: 'Lietuvių', text: lang.lithuanian, language: ltLang}]}
+            data={[ {key: 'Light UI', text: 'Light UI', theme: lightUI},
+                    {key: 'Dark UI', text: 'Dark UI', theme: darkUI},
+                    ]}
 
             renderItem={({ item }) => (
               this.renderRow(item)
@@ -95,9 +96,9 @@ class LanguageSettingsScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { language: state.language};
+  return { language: state.language, theme: state.theme};
 };
 
 export default connect(mapStateToProps, {
-  languageChanged,
-})(LanguageSettingsScreen);
+  themeChanged,
+})(ThemeSettingsScreen);
