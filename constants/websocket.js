@@ -11,6 +11,7 @@ export const messageTypes = [
   'currentRanking',
   'roomQuestions',
   'roomJoined',
+  'select',
 
 ].reduce( ( accum, msg ) =>
   {

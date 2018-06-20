@@ -34,3 +34,10 @@ export function logIn( hsh ) {
     emit(messageTypes.LogInn, {hash: hsh})
   }
 }
+
+export function select( ans ) {
+  return (dispatch, getState, {emit}) => {
+    //dispatch({ type: actionTypes.messageSendRequested })
+    emit(messageTypes.select, ans)
+  }
+}
