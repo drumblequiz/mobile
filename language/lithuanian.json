@@ -11,4 +11,11 @@
   "scoreLabel" : "Sveikiname! Jūs buvote",
   "goBackButton" : "ATGAL Į MENU",
   "waitingForAnswer" : "Ar teisingai atsakėte???",
+  "settings" : "Nustatymai",
+  "about" : "Apie",
+  "language" : "Kalba",
+  "interfaceTheme" : "Tema",
+  "languageName" : "Lietuvių",
+  "english" : "Anglų",
+  "lithuanian" : "Lietuvių",
 }

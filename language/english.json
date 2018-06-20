@@ -11,4 +11,11 @@
   "scoreLabel" : "Congratulations! You placed",
   "goBackButton" : "BACK TO MENU",
   "waitingForAnswer" : "Were you correct???",
+  "settings" : "Settings",
+  "about" : "About",
+  "language" : "Language",
+  "interfaceTheme" : "Theme",
+  "languageName" : "English",
+  "english" : "English",
+  "lithuanian" : "Lithuanian",
 }
