@@ -12,6 +12,7 @@ export const messageTypes = [
   'roomQuestions',
   'roomJoined',
   'select',
+  'showFinalScore',
 
 ].reduce( ( accum, msg ) =>
   {

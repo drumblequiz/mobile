@@ -21,7 +21,14 @@ class ScoreScreen extends React.Component {
   }
 
   handleGoBackClick() {
-
+      this.props.socket.roomId = "";
+      this.props.socket.roomExists = false;
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Home' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
   }
 
   render() {

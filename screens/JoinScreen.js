@@ -3,7 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import { joinRoom} from '../actions/network.js';
+import { joinRoom, roomJoinedChanged} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -30,33 +30,33 @@ class JoinScreen extends React.Component {
     this.props.joinRoom(this.props.socket.roomId,this.props.socket.userId ,this.state.text)
   }
 
-  shouldComponentUpdate(){
-    if(this.checkPropRoomJoinedStatus()){
+  render() {
+    console.log("STATUS");
+    console.log(this.props.socket.roomJoinedStatus);
+    if(this.props.socket.roomJoinedStatus){
       this.props.socket.gameStarted = false;
+      this.props.roomJoinedChanged(false);
+      console.log(this.checkPropRoomJoinedStatus());
+      console.log(this.props.socket.roomJoinedStatus);
       const resetAction = StackActions.reset({
         index: 0, actions: [
           NavigationActions.navigate({ routeName: 'WaitingGame' })
         ],
       });
       this.props.navigation.dispatch(resetAction);
-      return false;
     }
-    else if (this.props.socket.backToHome)
+    if (this.props.socket.backToHome)
     {
         this.props.socket.backToHome = false;
         this.props.socket.roomId = "";
+        this.props.socket.roomExists = false;
         const resetAction = StackActions.reset({
           index: 0, actions: [
             NavigationActions.navigate({ routeName: 'Home' })
           ],
         });
         this.props.navigation.dispatch(resetAction);
-        return false;
     }
-    return true;
-  }
-
-  render() {
     const lang = this.selectedLanguage();
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
@@ -104,4 +104,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps, {joinRoom, })(JoinScreen);
+export default connect(mapStateToProps, {joinRoom,roomJoinedChanged })(JoinScreen);

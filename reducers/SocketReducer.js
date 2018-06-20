@@ -15,6 +15,9 @@ const initialState = {
   roomJoinedStatus: false,
   backToHome: false,
   gameStarted: false,
+  timer: 0,
+  nextQuestion: false,
+  showScoreStatus: "inactive", // inactive|ok|error
 };
 
 const SocketReducer = (state = initialState, action) => {
@@ -75,9 +78,11 @@ const SocketReducer = (state = initialState, action) => {
     case messageTypes.roomQuestions:
       if (action.payload.roomId == state.roomId)
       {
-         return { ...state, answers: action.payload.qi, gameStarted: true};
+         return { ...state, answers: action.payload.qi, gameStarted: true, nextQuestion: true};
       }
     case messageTypes.roomJoined:
+        console.log("loool");
+        console.log(state.roomJoinedStatus);
         if (action.payload.status)
         {
             return { ...state, roomJoinedStatus: action.payload.status, errorMsg: action.payload.error};
@@ -86,6 +91,14 @@ const SocketReducer = (state = initialState, action) => {
         {
             return { ...state, roomJoinedStatus: action.payload.status, errorMsg: action.payload.error, backToHome: true};
         }
+      case messageTypes.showFinalScore:
+        if (action.payload.roomId == state.roomId)
+        {
+           return { ...state, showScoreStatus: "ok"};
+        }
+      case 'SET_ROOM_JOINED':
+        console.log("does it work??");
+        return { ...state, roomJoinedStatus: false};
     default:
       return state;
   }
