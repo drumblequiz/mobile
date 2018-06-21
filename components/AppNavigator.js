@@ -17,6 +17,7 @@ import Truth from '../screens/TruthScreen.js';
 import LanguageSettings from '../screens/LanguageSettingsScreen.js';
 import AboutSettings from '../screens/AboutSettingsScreen.js';
 import ThemeSettings from '../screens/ThemeSettingsScreen.js';
+import Disconnect from '../screens/DisconnectScreen.js';
 
 sideTransition = (index, position, initWidth, right) => {
   const translateX = position.interpolate({
@@ -94,6 +95,7 @@ export const AppNavigator = createStackNavigator({
   LanguageSettings: {screen: LanguageSettings},
   AboutSettings: {screen: AboutSettings},
   ThemeSettings: {screen: ThemeSettings},
+  Disconnect: {screen: Disconnect},
 },
 {
   transitionConfig: TransitionConfiguration,
