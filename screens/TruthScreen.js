@@ -3,7 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import {showScoreStatusChanged, correctAnswerReceivedChanged, getCorrectAnswer} from '../actions/network.js';
+import {showScoreStatusChanged, correctAnswerReceivedChanged, getCorrectAnswer, getPlayerRanking} from '../actions/network.js';
 
 
 
@@ -13,6 +13,7 @@ class TruthScreen extends React.Component {
   constructor(props) {
     super(props);
     this.props.getCorrectAnswer(this.props.socket.answers[0].QuestionInstanceId);
+    this.props.getPlayerRanking();
   }
 
   static navigationOptions = {
@@ -63,4 +64,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps, {showScoreStatusChanged, correctAnswerReceivedChanged, getCorrectAnswer, })(TruthScreen);
+export default connect(mapStateToProps, {showScoreStatusChanged, correctAnswerReceivedChanged, getCorrectAnswer, getPlayerRanking, })(TruthScreen);

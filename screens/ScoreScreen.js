@@ -42,8 +42,8 @@ class ScoreScreen extends React.Component {
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
         <View style={{ alignItems :'center', justifyContent:'center'}}>
-          <Text style={[{fontSize: 40, fontWeight: 'bold', textAlign: 'center', }]}>{lang.scoreLabel}</Text>
-          <Text style={[{fontSize: 40, fontWeight: 'bold', textAlign: 'center', width:300, height: 80}]}>10</Text>
+          <Text style={[{fontSize: 40, fontWeight: 'bold', textAlign: 'center', }]}>{ lang.scoreLabel }</Text>
+          <Text style={[{fontSize: 40, fontWeight: 'bold', textAlign: 'center', width:300, height: 80}]}>{this.props.socket.ranking}</Text>
           <TouchableNativeFeedback
             onPress={() => this.handleGoBackClick()}>
             <View style={[styleGeneral.joinButton, {width:300, height: 40}, theme.theme.element]}>

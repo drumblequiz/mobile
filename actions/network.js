@@ -21,10 +21,10 @@ export function register( mail ) {
   }
 }
 
-export function getPlayerRanking( pId ) {
+export function getPlayerRanking() {
   return (dispatch, getState, {emit}) => {
     //dispatch({ type: actionTypes.messageSendRequested })
-    emit(messageTypes.GetPlayerRanking, {playerId: pId})
+    emit(messageTypes.GetPlayerRanking, {playerId: ""})
   }
 }
 
