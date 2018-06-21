@@ -121,8 +121,8 @@ class HomeScreen extends React.Component {
             width={300}
             source={require('../images/DrumbleQuizLogo.png')}
           />
-          <Text style={[{width:300, height: 20}]}>{lang.roomId}</Text>
           <Text style={[{width:300, height: 20}]}>{this.getError()}</Text>
+          <Text style={[{width:300, height: 20}]}>{lang.roomId}</Text>
           <TextInput
             style={[styleGeneral.roomId, {width:300, height: 40}, theme.theme.element, theme.theme.textElement]}
             underlineColorAndroid='transparent'
