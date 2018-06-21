@@ -2,28 +2,16 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  bigblue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
+  element: {
+    backgroundColor: "#FFFFFF",
   },
-  red: {
-    backgroundColor: 'red',
+  backgroundView: {
+    backgroundColor: "#EFEFEF",
   },
-  roomId: {
-    //backgroundColor: 'red',
-    borderStyle: 'solid',
-    borderWidth: 4,
-    borderColor: 'black',
-    backgroundColor: 'white',
-    textAlign: 'center',
+  textElement: {
+    color:"#000000"
   },
-  joinButton: {
-    backgroundColor: 'black',
-    borderStyle: 'solid',
-    borderWidth: 4,
-    borderColor: 'black',
-    elevation: 0,
-    justifyContent: 'center',
+  textSecondary: {
+    color:"#555555"
   },
 });

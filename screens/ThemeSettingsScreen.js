@@ -18,7 +18,7 @@ class ThemeSettingsScreen extends React.Component {
   static navigationOptions  = ({ navigation }) => ({
     title: 'Theme',
     headerStyle: {
-      backgroundColor: '#EFEFEF',
+      backgroundColor: '#4FAFFF',
       elevation: 0,
       borderStyle: 'solid',
       borderBottomWidth: 0.4,
@@ -53,17 +53,19 @@ class ThemeSettingsScreen extends React.Component {
     return this.props.language.language;
   }
 
+  selectedTheme() {
+    return this.props.theme;
+  }
+
   renderRow = (item) => {
     const isSelectedUser = this.state.selected === item.key;
-    console.log(isSelectedUser)
-    console.log(this.state.selected)
-    console.log(item.key)
+    const theme = this.selectedTheme();
     return (
     <TouchableOpacity style={[{flexDirection:'row',}]} onPress={() => this.onSelectTheme(item.key, item.theme)}>
-      <View style={[{flex: 10, padding: 30, justifyContent:'center',backgroundColor: '#FFFFFF',height: 60}]}>
+      <View style={[{flex: 10, padding: 30, justifyContent:'center',backgroundColor: '#FFFFFF',height: 60},  theme.theme.element]}>
         {isSelectedUser ?
-          <Text style={{fontSize: 17, color:"#49A9FF"}}>{item.text}</Text>
-          : <Text style={{fontSize: 17}}>{item.text}</Text>
+          <Text style={[{fontSize: 17, color:"#49A9FF"},  theme.theme.textHighlight]}>{item.text}</Text>
+          : <Text style={[{fontSize: 17}, theme.theme.textElement]}>{item.text}</Text>
         }
 
       </View>
@@ -73,8 +75,9 @@ class ThemeSettingsScreen extends React.Component {
 
   render() {
     const lang = this.selectedLanguage();
+    const theme = this.selectedTheme();
     return (
-      <SafeAreaView style={{ backgroundColor: '#EFEFEF', flex:1, flexDirection: 'column'}}>
+      <SafeAreaView style={[{ backgroundColor: '#EFEFEF', flex:1, flexDirection: 'column'}, theme.theme.backgroundView]}>
         <View>
           <FlatList marginTop={7} style={[{borderStyle: 'solid', borderTopWidth: 0.4, borderBottomWidth: 0.4, borderColor: '#BBBBBB',}]}
             data={[ {key: 'Light UI', text: 'Light UI', theme: lightUI},

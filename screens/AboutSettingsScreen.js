@@ -10,7 +10,7 @@ class AboutSettingsScreen extends React.Component {
   static navigationOptions  = ({ navigation }) => ({
     title: 'About',
     headerStyle: {
-      backgroundColor: '#EFEFEF',
+      backgroundColor: '#4FAFFF',
       elevation: 0,
       borderStyle: 'solid',
       borderBottomWidth: 0.4,
@@ -42,12 +42,17 @@ class AboutSettingsScreen extends React.Component {
     return this.props.language.language;
   }
 
+  selectedTheme() {
+    return this.props.theme;
+  }
+
   render() {
     const lang = this.selectedLanguage();
+    const theme = this.selectedTheme();
     return (
-      <SafeAreaView style={{ backgroundColor: '#EFEFEF',flex:1, flexDirection: 'column'}}>
-        <View marginTop={7} style={[{borderStyle: 'solid', borderTopWidth: 0.4, borderBottomWidth: 0.4, borderColor: '#BBBBBB',backgroundColor: '#FFFFFF'}]}>
-          <Text style={{fontSize: 18, padding: 30,}}>{lang.aboutText}</Text>
+      <SafeAreaView style={[{ backgroundColor: '#EFEFEF',flex:1, flexDirection: 'column'}, theme.theme.backgroundView]}>
+        <View marginTop={7} style={[{borderStyle: 'solid', borderTopWidth: 0.4, borderBottomWidth: 0.4, borderColor: '#BBBBBB',backgroundColor: '#FFFFFF'}, theme.theme.element]}>
+          <Text style={[{fontSize: 18, padding: 30,}, theme.theme.textElement]}>{lang.aboutText}</Text>
         </View>
       </SafeAreaView>
     );
@@ -55,7 +60,7 @@ class AboutSettingsScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { language: state.language};
+  return { language: state.language, theme: state.theme};
 };
 
 export default connect(mapStateToProps)(AboutSettingsScreen);

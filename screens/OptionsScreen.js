@@ -10,7 +10,7 @@ class OptionsScreen extends React.Component {
   static navigationOptions  = ({ navigation }) => ({
     title: 'Settings',
     headerStyle: {
-      backgroundColor: '#EFEFEF',
+      backgroundColor: '#4FAFFF',
       elevation: 0,
       borderStyle: 'solid',
       borderBottomWidth: 0.4,
@@ -50,7 +50,7 @@ class OptionsScreen extends React.Component {
     const lang = this.selectedLanguage();
     const theme = this.selectedTheme();
     return (
-      <SafeAreaView style={{ backgroundColor: '#EFEFEF',flex:1, flexDirection: 'column'}}>
+      <SafeAreaView style={[{ backgroundColor: '#EFEFEF',flex:1, flexDirection: 'column'}, theme.theme.backgroundView]}>
         <View>
           <FlatList marginTop={7} style={[{borderStyle: 'solid', borderTopWidth: 0.4, borderBottomWidth: 0.4, borderColor: '#BBBBBB',}]}
             data={[ {key: 'AboutSettings', text: lang.about},
@@ -60,11 +60,11 @@ class OptionsScreen extends React.Component {
             renderItem={({item}) =>
               <TouchableOpacity  onPress={() => this.handleSettingClick(item.key)}>
                 <View style={[{flexDirection:'row',}]}>
-                  <View style={[{flex: 10, padding: 30, justifyContent:'center', backgroundColor: '#FFFFFF', height: 60}]}>
-                    <Text style={{fontSize: 17}}>{item.text}</Text>
+                  <View style={[{flex: 10, padding: 30, justifyContent:'center', backgroundColor: '#FFFFFF', height: 60}, theme.theme.element]}>
+                    <Text style={[{fontSize: 17}, theme.theme.textElement]}>{item.text}</Text>
                   </View>
-                  <View style={[{flex: 4, padding: 30, alignItems:'flex-end', justifyContent:'center', backgroundColor: '#FFFFFF', height: 60}]}>
-                    <Text style={{fontSize: 12, color: '#555555'}}>{item.selection}</Text>
+                  <View style={[{flex: 4, padding: 30, alignItems:'flex-end', justifyContent:'center', backgroundColor: '#FFFFFF', height: 60}, theme.theme.element]}>
+                    <Text style={[{fontSize: 12, color: '#555555'}, theme.theme.textSecondary]}>{item.selection}</Text>
                   </View>
                 </View>
               </TouchableOpacity>
