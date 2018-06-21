@@ -69,7 +69,7 @@ class AboutSettingsScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { language: state.language, theme: state.theme};
+  return { language: state.language, socket: state.socket,theme: state.theme};
 };
 
 export default connect(mapStateToProps)(AboutSettingsScreen);

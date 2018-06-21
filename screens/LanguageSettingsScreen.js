@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { languageChanged } from '../actions/LanguageChangeAction.js';
 import ltLang from '../language/lithuanian.json';
 import enLang from '../language/english.json';
+import ndLang from '../language/dutch.json';
 
 if (Platform.OS === 'android') {SafeAreaView.setStatusBarHeight(0);}
 
@@ -90,7 +91,8 @@ class LanguageSettingsScreen extends React.Component {
         <View>
           <FlatList marginTop={7} style={[{borderStyle: 'solid', borderTopWidth: 0.4, borderBottomWidth: 0.4, borderColor: '#BBBBBB',}]}
             data={[ {key: 'English', text: lang.english, language: enLang},
-                    {key: 'Lietuvių', text: lang.lithuanian, language: ltLang}]}
+                    {key: 'Lietuvių', text: lang.lithuanian, language: ltLang},
+                    {key: 'Nederlands', text: lang.dutch, language: ndLang}]}
 
             renderItem={({ item }) => (
               this.renderRow(item)
