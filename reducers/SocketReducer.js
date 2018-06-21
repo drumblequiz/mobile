@@ -82,7 +82,7 @@ const SocketReducer = (state = initialState, action) => {
     case messageTypes.roomQuestions:
       if (action.payload.roomId == state.roomId)
       {
-         return { ...state, answers: action.payload.qi, gameStarted: true, nextQuestion: true};
+         return { ...state, answers: action.payload.qi.sort((a, b) => a.AnswerId > b.AnswerId), gameStarted: true, nextQuestion: true};
       }
     case messageTypes.roomJoined:
         if (action.payload.status)
