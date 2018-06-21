@@ -23,16 +23,14 @@ class TruthScreen extends React.Component {
 
   isCorrect()
   {
-    console.log(this.props.socket.answerChosen)
-    console.log(this.props.socket.correctAnswArr)
-      if (this.props.socket.answerChosen in this.props.socket.correctAnswArr)
+      for (var i = 0; i < this.props.socket.correctAnswArr.length; i++)
       {
-          return true;
+        if (this.props.socket.answerChosen.AnswerId== this.props.socket.correctAnswArr[i].answer_id)
+        {
+            return true;
+        }
       }
-      else
-      {
-          return false;
-      }
+      return false;
   }
 
   selectedLanguage() {
