@@ -103,7 +103,6 @@ class JoinScreen extends React.Component {
           <TextInput
             style={[styleGeneral.roomId, {width:300, height: 40}, theme.theme.element, theme.theme.textElement]}
             defaultValue=''
-            autoCapitalize={'characters'}
             underlineColorAndroid='transparent'
             maxLength={10}
             marginBottom={10}

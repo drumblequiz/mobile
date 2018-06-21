@@ -79,7 +79,6 @@ class RegisterScreen extends React.Component {
           <TextInput
             style={[styleGeneral.roomId, {width:300, height: 40}, theme.theme.element, theme.theme.textElement]}
             defaultValue=''
-            autoCapitalize={'characters'}
             underlineColorAndroid='transparent'
             maxLength={100}
             marginBottom={10}

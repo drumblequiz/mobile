@@ -125,7 +125,6 @@ class HomeScreen extends React.Component {
           <Text style={[{width:300, height: 20}]}>{this.getError()}</Text>
           <TextInput
             style={[styleGeneral.roomId, {width:300, height: 40}, theme.theme.element, theme.theme.textElement]}
-            autoCapitalize={'characters'}
             underlineColorAndroid='transparent'
             maxLength={10}
             marginBottom={10}
