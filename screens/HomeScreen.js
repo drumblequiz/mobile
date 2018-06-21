@@ -67,6 +67,10 @@ class HomeScreen extends React.Component {
     return this.props.language.language;
   }
 
+  selectedTheme() {
+    return this.props.theme;
+  }
+
   checkPropRoomExists() {
     return this.props.socket.roomExists;
   }
@@ -85,6 +89,7 @@ class HomeScreen extends React.Component {
 
   render() {
     const lang = this.selectedLanguage();
+    const theme = this.selectedTheme();
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
         <View style={{flex:10, alignItems :'center', justifyContent:'center'}}>
@@ -94,20 +99,17 @@ class HomeScreen extends React.Component {
           />
           <Text style={[{width:300, height: 20}]}>{lang.roomId}</Text>
           <TextInput
-            style={[styleGeneral.roomId, {width:300, height: 40}]}
-            defaultValue=''
+            style={[styleGeneral.roomId, {width:300, height: 40}, theme.theme.element, theme.theme.textElement]}
             autoCapitalize={'characters'}
             underlineColorAndroid='transparent'
             maxLength={10}
-            placeholderTextColor='black'
-            selectionColor='black'
             marginBottom={10}
             onChangeText={(text) => this.setState({text})}
           />
           <TouchableNativeFeedback
             onPress={() => this.handleRoomJoinClick()}>
-            <View style={[styleGeneral.joinButton, {width:300, height: 40}]}>
-              <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.joinButton}</Text>
+            <View style={[styleGeneral.joinButton, {width:300, height: 40}, theme.theme.element]}>
+              <Text style={[{fontWeight: 'bold', color:"white", textAlign: 'center'}, theme.theme.textElement]}>{lang.joinButton}</Text>
             </View>
           </TouchableNativeFeedback>
         </View>
@@ -128,7 +130,7 @@ class HomeScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { language: state.language, socket: state.socket };
+  return { language: state.language, socket: state.socket, theme: state.theme };
 };
 
 export default connect(mapStateToProps, {doesRoomExist, roomJoinedChanged, roomExistsChanged, })(HomeScreen);

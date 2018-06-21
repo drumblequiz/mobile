@@ -22,6 +22,10 @@ class JoinScreen extends React.Component {
     return this.props.language.language;
   }
 
+  selectedTheme() {
+    return this.props.theme;
+  }
+
   checkPropRoomJoinedStatus() {
     return this.props.socket.roomJoinedStatus;
   }
@@ -54,6 +58,7 @@ class JoinScreen extends React.Component {
         this.props.navigation.dispatch(resetAction);
     }
     const lang = this.selectedLanguage();
+    const theme = this.selectedTheme();
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
         <View style={{flex:10, alignItems :'center', justifyContent:'center'}}>
@@ -63,20 +68,18 @@ class JoinScreen extends React.Component {
           />
           <Text style={[{width:300, height: 20}]}>{lang.displayName}</Text>
           <TextInput
-            style={[styleGeneral.roomId, {width:300, height: 40}]}
+            style={[styleGeneral.roomId, {width:300, height: 40}, theme.theme.element, theme.theme.textElement]}
             defaultValue=''
             autoCapitalize={'characters'}
             underlineColorAndroid='transparent'
             maxLength={10}
-            placeholderTextColor='black'
-            selectionColor='black'
             marginBottom={10}
             onChangeText={(text) => this.setState({text})}
           />
           <TouchableNativeFeedback
             onPress={() => this.handleNameEnterClick()}>
-            <View style={[styleGeneral.joinButton, {width:300, height: 40}]}>
-              <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.joinButton}</Text>
+            <View style={[styleGeneral.joinButton, {width:300, height: 40}, theme.theme.element]}>
+              <Text style={[{fontWeight: 'bold', color:"white", textAlign: 'center'}, theme.theme.textElement]}>{lang.joinButton}</Text>
             </View>
           </TouchableNativeFeedback>
         </View>
@@ -97,7 +100,7 @@ class JoinScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { language: state.language, socket: state.socket };
+  return { language: state.language, socket: state.socket, theme: state.theme };
 };
 
 export default connect(mapStateToProps, {joinRoom,roomJoinedChanged, gameStartedChanged, backToHomeChanged, roomIdChanged, roomExistsChanged, })(JoinScreen);

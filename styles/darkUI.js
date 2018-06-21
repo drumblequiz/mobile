@@ -3,7 +3,8 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   element: {
-    backgroundColor: "#111111",
+    backgroundColor: "#333333",
+    borderColor: '#111111',
   },
   backgroundView: {
     backgroundColor: "#333333",

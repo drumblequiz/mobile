@@ -22,6 +22,10 @@ class LoginScreen extends React.Component {
     return this.props.language.language;
   }
 
+  selectedTheme() {
+    return this.props.theme;
+  }
+
   checkProploggedIn() {
     return this.props.socket.loggedIn;
   }
@@ -51,6 +55,7 @@ class LoginScreen extends React.Component {
 
   render() {
     const lang = this.selectedLanguage();
+    const theme = this.selectedTheme();
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
         <View style={{flex:10, alignItems :'center', justifyContent:'center'}}>
@@ -60,7 +65,7 @@ class LoginScreen extends React.Component {
           />
           <Text style={[{width:300, height: 20}]}>{lang.loginHash}</Text>
           <TextInput
-            style={[styleGeneral.roomId, {width:300, height: 40}]}
+            style={[styleGeneral.roomId, {width:300, height: 40}, theme.theme.element, theme.theme.textElement]}
             defaultValue=''
             autoCapitalize={'characters'}
             underlineColorAndroid='transparent'
@@ -72,14 +77,14 @@ class LoginScreen extends React.Component {
           />
           <TouchableNativeFeedback
             onPress={() => this.handleLogInClick()}>
-            <View marginBottom={10} style={[styleGeneral.joinButton, {width:300, height: 40}]}>
-              <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.loginButton}</Text>
+            <View marginBottom={10} style={[styleGeneral.joinButton, {width:300, height: 40}, theme.theme.element]}>
+              <Text style={[{fontWeight: 'bold', color:"white", textAlign: 'center'}, theme.theme.textElement]}>{lang.loginButton}</Text>
             </View>
           </TouchableNativeFeedback>
           <TouchableNativeFeedback
             onPress={() => this.handleNoHashClick()}>
-            <View style={[styleGeneral.joinButton, {width:300, height: 40}]}>
-              <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.noHashCodeButton}</Text>
+            <View style={[styleGeneral.joinButton, {width:300, height: 40}, theme.theme.element]}>
+              <Text style={[{fontWeight: 'bold', color:"white", textAlign: 'center'}, theme.theme.textElement]}>{lang.noHashCodeButton}</Text>
             </View>
           </TouchableNativeFeedback>
         </View>
@@ -101,7 +106,7 @@ class LoginScreen extends React.Component {
 
 
 const mapStateToProps = state => {
-  return { language: state.language, socket: state.socket };
+  return { language: state.language, socket: state.socket, theme: state.theme };
 };
 
 export default connect(mapStateToProps, {logIn,roomJoinedChanged, registerStatusChanged })(LoginScreen);

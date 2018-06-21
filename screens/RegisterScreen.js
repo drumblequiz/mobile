@@ -30,6 +30,10 @@ class RegisterScreen extends React.Component {
     return this.props.language.language;
   }
 
+  selectedTheme() {
+    return this.props.theme;
+  }
+
   shouldComponentUpdate(){
     if(this.checkPropRegisterStatus() == 'ok'){
       this.props.navigation.navigate('Login');
@@ -44,6 +48,7 @@ class RegisterScreen extends React.Component {
 
   render() {
     const lang = this.selectedLanguage();
+    const theme = this.selectedTheme();
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
         <View style={{flex:10, alignItems :'center', justifyContent:'center'}}>
@@ -53,20 +58,18 @@ class RegisterScreen extends React.Component {
           />
           <Text style={[{width:300, height: 20}]}>{lang.registerLabel}</Text>
           <TextInput
-            style={[styleGeneral.roomId, {width:300, height: 40}]}
+            style={[styleGeneral.roomId, {width:300, height: 40}, theme.theme.element, theme.theme.textElement]}
             defaultValue=''
             autoCapitalize={'characters'}
             underlineColorAndroid='transparent'
             maxLength={100}
-            placeholderTextColor='black'
-            selectionColor='black'
             marginBottom={10}
             onChangeText={(text) => this.setState({text})}
           />
           <TouchableNativeFeedback
             onPress={() => this.handleRegisterClick()}>
-            <View style={[styleGeneral.joinButton, {width:300, height: 40}]}>
-              <Text style={{fontWeight: 'bold', color:"white", textAlign: 'center'}}>{lang.registerButton}</Text>
+            <View style={[styleGeneral.joinButton, {width:300, height: 40}, theme.theme.element]}>
+              <Text style={[{fontWeight: 'bold', color:"white", textAlign: 'center'}, theme.theme.textElement]}>{lang.registerButton}</Text>
             </View>
           </TouchableNativeFeedback>
         </View>
@@ -88,7 +91,7 @@ class RegisterScreen extends React.Component {
 
 
 const mapStateToProps = state => {
-  return { language: state.language, socket: state.socket };
+  return { language: state.language, socket: state.socket, theme: state.theme };
 };
 
 export default connect(mapStateToProps, {register, })(RegisterScreen);
