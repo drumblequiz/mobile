@@ -92,7 +92,36 @@ const SocketReducer = (state = initialState, action) => {
     {
         if (action.payload.roomId == state.roomId)
         {
-            return { ...state, answers: action.payload.qi.sort((a, b) => a.AnswerId > b.AnswerId), gameStarted: true, nextQuestion: true};
+            // because react native does not support array sorting, doing it by hand
+            newAns = [];
+            toReturn = [];
+            maxNumber = action.payload.qi[0].AnswerId;
+            for (i = 0; i < action.payload.qi.length; i++)
+            {
+                if (maxNumber < action.payload.qi[i].AnswerId)
+                {
+                    maxNumber = action.payload.qi[i].AnswerId;
+                    toReturn[0] = action.payload.qi;
+                }
+            }
+
+            newAns[0] = 0;
+            for (i = 0;  i < action.payload.qi.length; i++)
+            {
+                minNumb = maxNumber;
+                for (i2 = 0;  i2 < action.payload.qi.length; i2++)
+                {
+                    if (action.payload.qi[i2].AnswerId <= minNumb && action.payload.qi[i2].AnswerId > newAns[i])
+                    {
+                      minNumb = action.payload.qi[i2].AnswerId;
+                      toReturn[i] = action.payload.qi[i2];
+                    }
+                }
+                newAns[i] = minNumb;
+                newAns[i+1] = minNumb;
+            }
+
+            return { ...state, answers: toReturn, gameStarted: true, nextQuestion: true};
         }
         else
         {
