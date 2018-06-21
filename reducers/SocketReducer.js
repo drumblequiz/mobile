@@ -19,6 +19,7 @@ const initialState = {
   nextQuestion: false,
   showScoreStatus: "inactive", // inactive|ok|error
   serverTime: new Date(),
+  correctAnswerReceived: false,
 };
 
 const SocketReducer = (state = initialState, action) => {
@@ -73,7 +74,7 @@ const SocketReducer = (state = initialState, action) => {
        return { ...state,  loggedIn: true, userId: action.payload.id};
     }
     case messageTypes.correct:
-      return { ...state, correctAnswArr: action.payload };
+        return { ...state, correctAnswArr: action.payload, correctAnswerReceived: true };
     case messageTypes.currentRanking:
       return { ...state, ranking: action.payload.place};
     case messageTypes.roomQuestions:
@@ -116,6 +117,8 @@ const SocketReducer = (state = initialState, action) => {
         return { ...state, registerStatus: action.payload.status};
       case 'SET_SHOW_SCORE_STATUS':
         return { ...state, showScoreStatus: action.payload.status};
+      case 'SET_CORRECT_ANSWER_RECEIVED':
+        return { ...state, correctAnswerReceived: action.payload.status};
     default:
       return state;
   }

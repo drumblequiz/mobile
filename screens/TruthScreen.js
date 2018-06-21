@@ -3,7 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import {showScoreStatusChanged} from '../actions/network.js';
+import {showScoreStatusChanged, correctAnswerReceivedChanged, getCorrectAnswer} from '../actions/network.js';
 
 
 
@@ -12,6 +12,7 @@ import styleGeneral from '../styles/general.js';
 class TruthScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.props.getCorrectAnswer(this.props.socket.answers[0].QuestionInstanceId);
   }
 
   static navigationOptions = {
@@ -29,6 +30,7 @@ class TruthScreen extends React.Component {
 
   render() {
     if(this.props.socket.nextQuestion){
+      this.props.correctAnswerReceivedChanged(false);
       const resetAction = StackActions.reset({
         index: 0, actions: [
           NavigationActions.navigate({ routeName: 'Answer' })
@@ -38,6 +40,7 @@ class TruthScreen extends React.Component {
     }
     if(this.props.socket.showScoreStatus == "ok"){
       this.props.showScoreStatusChanged("inactive");
+      this.props.correctAnswerReceivedChanged(false);
       const resetAction = StackActions.reset({
         index: 0, actions: [
           NavigationActions.navigate({ routeName: 'Score' })
@@ -60,4 +63,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket };
 };
 
-export default connect(mapStateToProps, {showScoreStatusChanged, })(TruthScreen);
+export default connect(mapStateToProps, {showScoreStatusChanged, correctAnswerReceivedChanged, getCorrectAnswer, })(TruthScreen);

@@ -42,6 +42,13 @@ export function select( ans ) {
   }
 }
 
+export function getCorrectAnswer( questionInstanceId ) {
+  return (dispatch, getState, {emit}) => {
+    //dispatch({ type: actionTypes.messageSendRequested })
+    emit(messageTypes.getCorrectAnswer, questionInstanceId)
+  }
+}
+
 export const roomJoinedChanged = (status) => {
   return {
     type: 'SET_ROOM_JOINED',
@@ -94,6 +101,13 @@ export const registerStatusChanged = (status) => {
 export const showScoreStatusChanged = (status) => {
   return {
     type: 'SET_SHOW_SCORE_STATUS',
+    payload: {status}
+  };
+};
+
+export const correctAnswerReceivedChanged = (status) => {
+  return {
+    type: 'SET_CORRECT_ANSWER_RECEIVED',
     payload: {status}
   };
 };

@@ -14,6 +14,7 @@ export const messageTypes = [
   'select',
   'showFinalScore',
   'serverTime',
+  'getCorrectAnswer',
 ].reduce( ( accum, msg ) =>
   {
     accum[ msg ] = msg;
