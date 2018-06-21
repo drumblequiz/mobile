@@ -23,5 +23,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     elevation: 3,
     borderRadius: 5,
+    backgroundColor: "#AAAAAA",
   }
 });
