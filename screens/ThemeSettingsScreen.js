@@ -74,6 +74,15 @@ class ThemeSettingsScreen extends React.Component {
   }
 
   render() {
+    if(this.props.socket.disconnected)
+    {
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Home' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+    }
     const lang = this.selectedLanguage();
     const theme = this.selectedTheme();
     return (
@@ -99,7 +108,7 @@ class ThemeSettingsScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { language: state.language, theme: state.theme};
+  return { language: state.language, socket: state.socket, theme: state.theme};
 };
 
 export default connect(mapStateToProps, {

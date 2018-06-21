@@ -30,6 +30,15 @@ class TruthScreen extends React.Component {
   }
 
   render() {
+    if(this.props.socket.disconnected)
+    {
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Home' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+    }
     if(this.props.socket.nextQuestion){
       this.props.correctAnswerReceivedChanged(false);
       const resetAction = StackActions.reset({

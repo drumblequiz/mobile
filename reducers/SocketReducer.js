@@ -21,6 +21,7 @@ const initialState = {
   serverTime: new Date(),
   correctAnswerReceived: false,
   showError: false,
+  disconnected: false,
 };
 
 const SocketReducer = (state = initialState, action) => {
@@ -103,6 +104,8 @@ const SocketReducer = (state = initialState, action) => {
         {
            return { ...state, serverTime: action.payload.time};
         }
+      case messageTypes.disconnect:
+        return { ...state, disconnected: true};
       case 'SET_ROOM_JOINED':
         return { ...state, roomJoinedStatus: action.payload.status};
       case 'SET_NEXT_QUESTION':

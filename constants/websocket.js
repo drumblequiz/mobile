@@ -15,6 +15,7 @@ export const messageTypes = [
   'showFinalScore',
   'serverTime',
   'getCorrectAnswer',
+  'disconnect',
 ].reduce( ( accum, msg ) =>
   {
     accum[ msg ] = msg;

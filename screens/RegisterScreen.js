@@ -35,7 +35,15 @@ class RegisterScreen extends React.Component {
   }
 
   shouldComponentUpdate(){
-    console.log(this.checkPropRegisterStatus());
+    if(this.props.socket.disconnected)
+    {
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Home' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+    }
     if(this.checkPropRegisterStatus() == 'ok'){
       this.props.showErrorChanged(false);
       this.props.navigation.navigate('Login');

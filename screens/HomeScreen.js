@@ -15,6 +15,15 @@ class HomeScreen extends React.Component {
 
   shouldComponentUpdate()
   {
+    if(this.props.socket.disconnected)
+    {
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Home' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+    }
     if (this.checkPropRoomExists())
     {
       this.props.roomExistsChanged(false);

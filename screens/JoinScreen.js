@@ -47,6 +47,24 @@ class JoinScreen extends React.Component {
   }
 
   render() {
+    if(this.props.socket.disconnected)
+    {
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Home' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+    }
+    if(this.props.socket.disconnected)
+    {
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Home' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+    }
     if(this.props.socket.roomJoinedStatus){
       this.props.gameStartedChanged(false);
       this.props.roomJoinedChanged(false);

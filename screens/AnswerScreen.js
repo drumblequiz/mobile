@@ -60,6 +60,15 @@ class AnswerScreen extends React.Component {
   }
 
   render() {
+    if(this.props.socket.disconnected)
+    {
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Home' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+    }
     const lang = this.selectedLanguage();
     const theme = this.selectedTheme();
     return (
@@ -72,14 +81,12 @@ class AnswerScreen extends React.Component {
           <TouchableOpacity style={[{width:140, height: 140}]} onPress={() => this.handleChoiceClick(0)}>
             <View marginTop={'3%'} marginBottom={'3%'} marginRight={'3%'} marginLeft={'3%'} style={[{width:'94%', height:'94%'}, theme.theme.playButton]}>
               <Image width={120} source={require('../images/elephant.png')}/>
-              <Text>{this.props.socket.answers[0].Answer}</Text>
             </View>
           </TouchableOpacity>
           { this.props.socket.answers.length > 1 ?
           <TouchableOpacity style={[{width:140, height: 140}]} onPress={() => this.handleChoiceClick(1)}>
             <View marginTop={'3%'} marginBottom={'3%'} marginRight={'3%'} marginLeft={'3%'} style={[{width:'94%', height:'94%'}, theme.theme.playButton]}>
               <Image width={120} source={require('../images/lion.png')}/>
-              <Text>{this.props.socket.answers[1].Answer}</Text>
             </View>
           </TouchableOpacity>
           :<TouchableOpacity/>}
@@ -87,7 +94,6 @@ class AnswerScreen extends React.Component {
           <TouchableOpacity style={[{width:140, height: 140}]} onPress={() => this.handleChoiceClick(2)}>
             <View marginTop={'3%'} marginBottom={'3%'} marginRight={'3%'} marginLeft={'3%'} style={[{width:'94%', height:'94%'}, theme.theme.playButton]}>
               <Image width={120} source={require('../images/crocodile.png')}/>
-              <Text>{this.props.socket.answers[2].Answer}</Text>
             </View>
           </TouchableOpacity>
           :<TouchableOpacity/>}
@@ -95,7 +101,6 @@ class AnswerScreen extends React.Component {
           <TouchableOpacity style={[{width:140, height: 140}]} onPress={() => this.handleChoiceClick(3)}>
             <View marginTop={'3%'} marginBottom={'3%'} marginRight={'3%'} marginLeft={'3%'} style={[{width:'94%', height:'94%'}, theme.theme.playButton]}>
               <Image width={120} source={require('../images/flamingo.png')}/>
-              <Text>{this.props.socket.answers[3].Answer}</Text>
             </View>
           </TouchableOpacity>
           :<TouchableOpacity/>}

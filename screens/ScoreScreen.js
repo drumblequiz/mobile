@@ -37,6 +37,15 @@ class ScoreScreen extends React.Component {
   }
 
   render() {
+    if(this.props.socket.disconnected)
+    {
+      const resetAction = StackActions.reset({
+        index: 0, actions: [
+          NavigationActions.navigate({ routeName: 'Home' })
+        ],
+      });
+      this.props.navigation.dispatch(resetAction);
+    }
     const lang = this.selectedLanguage();
     const theme = this.selectedTheme();
     return (
