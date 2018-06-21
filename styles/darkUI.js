@@ -15,4 +15,13 @@ export default StyleSheet.create({
   textSecondary: {
     color:"#AAAAAA"
   },
+  playButton: {
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderColor: '#111111',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 3,
+    borderRadius: 5,
+  }
 });

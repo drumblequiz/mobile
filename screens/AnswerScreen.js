@@ -37,6 +37,10 @@ class AnswerScreen extends React.Component {
     return this.props.language.language;
   }
 
+  selectedTheme() {
+    return this.props.theme;
+  }
+
   compare(a,b) {
     if (a.AnswerId < b.AnswerId)
       return -1;
@@ -65,6 +69,7 @@ class AnswerScreen extends React.Component {
 
   render() {
     const lang = this.selectedLanguage();
+    const theme = this.selectedTheme();
     return (
       <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
         <View style={{ flex:3, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap',}}>
@@ -72,23 +77,23 @@ class AnswerScreen extends React.Component {
           <Text style={[{fontSize: 70, fontWeight: 'bold', textAlign: 'center'}]}>{this.getTimer()}</Text>
         </View>
         <View style={{flex:5, alignItems :'center', justifyContent:'center', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap',}}>
-          <TouchableOpacity onPress={() => this.handleChoiceClick(1)}>
-            <View marginTop={5} marginBottom={5} marginRight={5} marginLeft={5} style={[styleGeneral.joinButton, {width:140, height: 140}]}>
+          <TouchableOpacity style={[{width:140, height: 140}]} onPress={() => this.handleChoiceClick(1)}>
+            <View marginTop={'3%'} marginBottom={'3%'} marginRight={'3%'} marginLeft={'3%'} style={[{width:'94%', height:'94%'}, theme.theme.playButton]}>
               <Image width={120} source={require('../images/lion.png')}/>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.handleChoiceClick(2)}>
-            <View marginTop={5} marginBottom={5} marginRight={5} marginLeft={5} style={[styleGeneral.joinButton, {width:140, height: 140}]}>
+          <TouchableOpacity style={[{width:140, height: 140}]} onPress={() => this.handleChoiceClick(2)}>
+            <View marginTop={'3%'} marginBottom={'3%'} marginRight={'3%'} marginLeft={'3%'} style={[{width:'94%', height:'94%'}, theme.theme.playButton]}>
               <Image width={120} source={require('../images/crocodile.png')}/>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.handleChoiceClick(3)}>
-            <View marginTop={5} marginBottom={5} marginRight={5} marginLeft={5} style={[styleGeneral.joinButton, {width:140, height: 140}]}>
+          <TouchableOpacity style={[{width:140, height: 140}]} onPress={() => this.handleChoiceClick(3)}>
+            <View marginTop={'3%'} marginBottom={'3%'} marginRight={'3%'} marginLeft={'3%'} style={[{width:'94%', height:'94%'}, theme.theme.playButton]}>
               <Image width={120} source={require('../images/flamingo.png')}/>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.handleChoiceClick(4)}>
-            <View marginTop={5} marginBottom={5} marginRight={5} marginLeft={5} style={[styleGeneral.joinButton, {width:140, height: 140}]}>
+          <TouchableOpacity style={[{width:140, height: 140}]} onPress={() => this.handleChoiceClick(4)}>
+            <View marginTop={'3%'} marginBottom={'3%'} marginRight={'3%'} marginLeft={'3%'} style={[{width:'94%', height:'94%'}, theme.theme.playButton]}>
               <Image width={120} source={require('../images/elephant.png')}/>
             </View>
           </TouchableOpacity>
@@ -99,7 +104,7 @@ class AnswerScreen extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { language: state.language, socket: state.socket };
+  return { language: state.language, socket: state.socket, theme: state.theme };
 };
 
 export default connect(mapStateToProps, {select, nextQuestionChanged, })(AnswerScreen);
