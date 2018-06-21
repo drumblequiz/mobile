@@ -20,6 +20,7 @@ const initialState = {
   showScoreStatus: "inactive", // inactive|ok|error
   serverTime: new Date(),
   correctAnswerReceived: false,
+  showError: false,
 };
 
 const SocketReducer = (state = initialState, action) => {
@@ -33,11 +34,11 @@ const SocketReducer = (state = initialState, action) => {
         }
         else if (action.payload.status == "inactive")
         {
-          return { ...state,  roomExists: false, errorMsg: "Room is not active." };
+          return { ...state,  roomExists: false, errorMsg: "Room is not active.", showError: true };
         }
         if (action.payload.status == "notExists")
         {
-           return { ...state,  roomExists: false, errorMsg: "Room does not exist." };
+           return { ...state,  roomExists: false, errorMsg: "Room does not exist.", showError: true };
         }
       }
       else
@@ -48,17 +49,18 @@ const SocketReducer = (state = initialState, action) => {
         }
         else if (action.payload.status == "inactive")
         {
-          return { ...state,  roomExists: false, errorMsg: "Room is not active." };
+          return { ...state,  roomExists: false, errorMsg: "Room is not active.", showError: true };
         }
         if (action.payload.status == "notExists")
         {
-           return { ...state,  roomExists: false, errorMsg: "Room does not exist." };
+           return { ...state,  roomExists: false, errorMsg: "Room does not exist.", showError: true };
         }
       }
     case messageTypes.registerResponse:
+      console.log("RESPONSE: " + action.payload);
       if (action.payload == false)
       {
-         return { ...state,  registerStatus: "error"};
+         return { ...state,  registerStatus: "error", errorMsg: "Incorrect Email.", showError: true };
       }
       else if (action.payload == true)
       {
@@ -67,7 +69,7 @@ const SocketReducer = (state = initialState, action) => {
     case messageTypes.logInInfo:
     if (action.payload.success == false)
     {
-       return { ...state};
+       return { ...state, errorMsg: "Incorrect Hash.", showError: true };
     }
     else if (action.payload.success == true)
     {
@@ -89,7 +91,7 @@ const SocketReducer = (state = initialState, action) => {
         }
         else
         {
-            return { ...state, roomJoinedStatus: action.payload.status, errorMsg: action.payload.error, backToHome: true};
+            return { ...state, roomJoinedStatus: action.payload.status, errorMsg: action.payload.error, backToHome: true, showError: true};
         }
       case messageTypes.showFinalScore:
         if (action.payload.roomId == state.roomId)
@@ -119,6 +121,8 @@ const SocketReducer = (state = initialState, action) => {
         return { ...state, showScoreStatus: action.payload.status};
       case 'SET_CORRECT_ANSWER_RECEIVED':
         return { ...state, correctAnswerReceived: action.payload.status};
+      case 'SET_SHOW_ERROR':
+        return { ...state, showError: action.payload.status};
     default:
       return state;
   }

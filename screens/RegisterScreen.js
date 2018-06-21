@@ -3,7 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import {register} from '../actions/network.js';
+import {register, showErrorChanged} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -35,15 +35,25 @@ class RegisterScreen extends React.Component {
   }
 
   shouldComponentUpdate(){
+    console.log(this.checkPropRegisterStatus());
     if(this.checkPropRegisterStatus() == 'ok'){
+      this.props.showErrorChanged(false);
       this.props.navigation.navigate('Login');
       return false;
     }
-    else if (this.checkPropRegisterStatus() == 'error')
-    {
-        // show error msg
-    }
     return true;
+  }
+
+  getError()
+  {
+    if (this.props.socket.showError)
+    {
+        return this.props.socket.errorMsg;
+    }
+    else
+    {
+      return "";
+    }
   }
 
   render() {
@@ -56,6 +66,7 @@ class RegisterScreen extends React.Component {
             width={300}
             source={require('../images/DrumbleQuizLogo.png')}
           />
+          <Text style={[{width:300, height: 20}]}>{this.getError()}</Text>
           <Text style={[{width:300, height: 20}]}>{lang.registerLabel}</Text>
           <TextInput
             style={[styleGeneral.roomId, {width:300, height: 40}, theme.theme.element, theme.theme.textElement]}
@@ -94,4 +105,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket, theme: state.theme };
 };
 
-export default connect(mapStateToProps, {register, })(RegisterScreen);
+export default connect(mapStateToProps, {register, showErrorChanged})(RegisterScreen);

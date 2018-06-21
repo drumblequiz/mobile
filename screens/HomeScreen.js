@@ -3,7 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import {doesRoomExist, roomJoinedChanged, roomExistsChanged} from '../actions/network.js';
+import {doesRoomExist, roomJoinedChanged, roomExistsChanged, showErrorChanged} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -21,6 +21,7 @@ class HomeScreen extends React.Component {
       if (this.checkPropRoomAnnonymous())
       {
         this.props.roomJoinedChanged(false);
+        this.props.showErrorChanged(false);
         const resetAction = StackActions.reset({
           index: 0, actions: [
             NavigationActions.navigate({ routeName: 'Join' })
@@ -33,6 +34,7 @@ class HomeScreen extends React.Component {
         if (this.checkPropIsLoggedIn())
         {
           this.props.roomJoinedChanged(false);
+          this.props.showErrorChanged(false);
           const resetAction = StackActions.reset({
             index: 0, actions: [
               NavigationActions.navigate({ routeName: 'Join' })
@@ -42,6 +44,7 @@ class HomeScreen extends React.Component {
         }
         else
         {
+          this.props.showErrorChanged(false);
           const resetAction = StackActions.reset({
             index: 0, actions: [
               NavigationActions.navigate({ routeName: 'Login' })
@@ -87,6 +90,18 @@ class HomeScreen extends React.Component {
     this.props.doesRoomExist(this.state.text)
   }
 
+  getError()
+  {
+    if (this.props.socket.showError)
+    {
+        return this.props.socket.errorMsg;
+    }
+    else
+    {
+      return "";
+    }
+  }
+
   render() {
     const lang = this.selectedLanguage();
     const theme = this.selectedTheme();
@@ -98,6 +113,7 @@ class HomeScreen extends React.Component {
             source={require('../images/DrumbleQuizLogo.png')}
           />
           <Text style={[{width:300, height: 20}]}>{lang.roomId}</Text>
+          <Text style={[{width:300, height: 20}]}>{this.getError()}</Text>
           <TextInput
             style={[styleGeneral.roomId, {width:300, height: 40}, theme.theme.element, theme.theme.textElement]}
             autoCapitalize={'characters'}
@@ -133,4 +149,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket, theme: state.theme };
 };
 
-export default connect(mapStateToProps, {doesRoomExist, roomJoinedChanged, roomExistsChanged, })(HomeScreen);
+export default connect(mapStateToProps, {doesRoomExist, roomJoinedChanged, roomExistsChanged, showErrorChanged})(HomeScreen);

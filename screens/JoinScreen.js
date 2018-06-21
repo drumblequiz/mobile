@@ -3,7 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import { joinRoom, roomJoinedChanged, gameStartedChanged, backToHomeChanged, roomIdChanged, roomExistsChanged} from '../actions/network.js';
+import { joinRoom, roomJoinedChanged, gameStartedChanged, backToHomeChanged, roomIdChanged, roomExistsChanged,showErrorChanged} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -34,10 +34,23 @@ class JoinScreen extends React.Component {
     this.props.joinRoom(this.props.socket.roomId,this.props.socket.userId ,this.state.text)
   }
 
+  getError()
+  {
+    if (this.props.socket.showError)
+    {
+        return this.props.socket.errorMsg;
+    }
+    else
+    {
+      return "";
+    }
+  }
+
   render() {
     if(this.props.socket.roomJoinedStatus){
       this.props.gameStartedChanged(false);
       this.props.roomJoinedChanged(false);
+      this.props.showErrorChanged(false);
       const resetAction = StackActions.reset({
         index: 0, actions: [
           NavigationActions.navigate({ routeName: 'WaitingGame' })
@@ -50,6 +63,7 @@ class JoinScreen extends React.Component {
         this.props.backToHomeChanged(false);
         this.props.roomIdChanged("");
         this.props.roomExistsChanged(false);
+        this.props.showErrorChanged(false);
         const resetAction = StackActions.reset({
           index: 0, actions: [
             NavigationActions.navigate({ routeName: 'Home' })
@@ -66,6 +80,7 @@ class JoinScreen extends React.Component {
             width={300}
             source={require('../images/DrumbleQuizLogo.png')}
           />
+          <Text style={[{width:300, height: 20}]}>{this.getError()}</Text>
           <Text style={[{width:300, height: 20}]}>{lang.displayName}</Text>
           <TextInput
             style={[styleGeneral.roomId, {width:300, height: 40}, theme.theme.element, theme.theme.textElement]}
@@ -103,4 +118,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket, theme: state.theme };
 };
 
-export default connect(mapStateToProps, {joinRoom,roomJoinedChanged, gameStartedChanged, backToHomeChanged, roomIdChanged, roomExistsChanged, })(JoinScreen);
+export default connect(mapStateToProps, {joinRoom,roomJoinedChanged, gameStartedChanged, backToHomeChanged, roomIdChanged, roomExistsChanged, showErrorChanged, })(JoinScreen);

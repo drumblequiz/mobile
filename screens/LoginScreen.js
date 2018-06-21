@@ -3,7 +3,7 @@ import { AppRegistry, TouchableNativeFeedback, TextInput, View, Text} from 'reac
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import {logIn, roomJoinedChanged, registerStatusChanged} from '../actions/network.js';
+import {logIn, roomJoinedChanged, registerStatusChanged, showErrorChanged} from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -32,6 +32,7 @@ class LoginScreen extends React.Component {
 
   handleNoHashClick() {
     this.props.registerStatusChanged("inactive");
+    this.props.showErrorChanged(false);
     this.props.navigation.navigate('Register');
   }
 
@@ -39,9 +40,22 @@ class LoginScreen extends React.Component {
     this.props.logIn(this.state.text)
   }
 
+  getError()
+  {
+    if (this.props.socket.showError)
+    {
+        return this.props.socket.errorMsg;
+    }
+    else
+    {
+      return "";
+    }
+  }
+
   shouldComponentUpdate(){
     if(this.checkProploggedIn()){
       this.props.roomJoinedChanged(false);
+      this.props.showErrorChanged(false);
       const resetAction = StackActions.reset({
         index: 0, actions: [
           NavigationActions.navigate({ routeName: 'Join' })
@@ -63,6 +77,7 @@ class LoginScreen extends React.Component {
             width={300}
             source={require('../images/DrumbleQuizLogo.png')}
           />
+          <Text style={[{width:300, height: 20}]}>{this.getError()}</Text>
           <Text style={[{width:300, height: 20}]}>{lang.loginHash}</Text>
           <TextInput
             style={[styleGeneral.roomId, {width:300, height: 40}, theme.theme.element, theme.theme.textElement]}
@@ -109,4 +124,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket, theme: state.theme };
 };
 
-export default connect(mapStateToProps, {logIn,roomJoinedChanged, registerStatusChanged })(LoginScreen);
+export default connect(mapStateToProps, {logIn,roomJoinedChanged, registerStatusChanged, showErrorChanged })(LoginScreen);

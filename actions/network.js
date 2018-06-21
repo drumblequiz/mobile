@@ -111,3 +111,10 @@ export const correctAnswerReceivedChanged = (status) => {
     payload: {status}
   };
 };
+
+export const showErrorChanged = (status) => {
+  return {
+    type: 'SET_SHOW_ERROR',
+    payload: {status}
+  };
+};
