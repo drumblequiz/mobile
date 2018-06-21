@@ -23,6 +23,8 @@ class TruthScreen extends React.Component {
 
   isCorrect()
   {
+    console.log(this.props.socket.answerChosen)
+    console.log(this.props.socket.correctAnswArr)
       if (this.props.socket.answerChosen in this.props.socket.correctAnswArr)
       {
           return true;
@@ -72,10 +74,14 @@ class TruthScreen extends React.Component {
     }
     const lang = this.selectedLanguage();
     return (
-      <SafeAreaView style={{ backgroundColor: '#4FAFFF', flex:1, flexDirection: 'column', justifyContent:'center'}}>
-        <View style={{ alignItems :'center', justifyContent:'center'}}>
-          <Text style={[{fontSize: 45, fontWeight: 'bold', textAlign: 'center', width:300, height: 150}]}>Maybe you were correct</Text>
-        </View>
+      <SafeAreaView style={{flex:1, flexDirection: 'column', justifyContent:'center', backgroundColor: '#4FAFFF'}}>
+        { this.isCorrect() ?
+        <View style={{ flex:1, alignItems :'center', justifyContent:'center', backgroundColor: '#77f442'}}>
+          <Text style={[{fontSize: 45, fontWeight: 'bold', textAlign: 'center', width:300, height: 150}]}>{lang.correct}</Text>
+        </View> :
+        <View style={{ flex:1, alignItems :'center', justifyContent:'center', backgroundColor: '#ff0000'}}>
+          <Text style={[{fontSize: 45, fontWeight: 'bold', textAlign: 'center', width:300, height: 150}]}>{lang.incorrect}</Text>
+        </View>}
       </SafeAreaView>
     );
   }

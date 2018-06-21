@@ -128,7 +128,7 @@ const SocketReducer = (state = initialState, action) => {
       case 'SET_SHOW_ERROR':
         return { ...state, showError: action.payload.status};
       case 'SET_ANSWER_CHOSEN':
-        return { ...state, showError: action.payload.status};
+        return { ...state, answerChosen: action.payload.status};
     default:
       return state;
   }

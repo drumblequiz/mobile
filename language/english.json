@@ -19,8 +19,8 @@
   "english" : "English",
   "lithuanian" : "Lithuanian",
   "dutch" : "Dutch",
-  "Correct" : "You were correct!",
-  "Incorrect" : "Too bad, good luck next time!",
+  "correct" : "You were correct!",
+  "incorrect" : "Too bad, good luck next time!",
   "aboutText" : "Mobile adaptation to Drumblequiz web application\n\nOriginally created by Jonas Motiejauskas and Matas Ramanauskas\n\nSpecifically for UCLL mobile course 2018",
   "disconnect" : "Connection to server lost, please restart the application",
 }

@@ -19,8 +19,8 @@
   "english" : "Anglų",
   "lithuanian" : "Lietuvių",
   "dutch" : "Olandų",
-  "Correct" : "Jūs buvote teisus!",
-  "Incorrect" : "Deja nepataikėte, sėkmės kitą kartą!",
+  "correct" : "Jūs buvote teisus!",
+  "incorrect" : "Deja nepataikėte, sėkmės kitą kartą!",
   "aboutText" : "Drumblequiz internetinės programėlės mobili aplikacija\n\nPradiniai autoriai Jonas Motiejauskas ir Matas Ramanauskas\n\nSukurta UCLL mobiliųjų programų kursui 2018",
   "disconnect" : "Atsijungėte nuo serverio, norėdami tęsti toliau, iš naujo įjunkite aplikaciją",
 }
