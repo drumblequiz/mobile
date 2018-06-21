@@ -51,16 +51,7 @@ class JoinScreen extends React.Component {
     {
       const resetAction = StackActions.reset({
         index: 0, actions: [
-          NavigationActions.navigate({ routeName: 'Home' })
-        ],
-      });
-      this.props.navigation.dispatch(resetAction);
-    }
-    if(this.props.socket.disconnected)
-    {
-      const resetAction = StackActions.reset({
-        index: 0, actions: [
-          NavigationActions.navigate({ routeName: 'Home' })
+          NavigationActions.navigate({ routeName: 'Disconnect' })
         ],
       });
       this.props.navigation.dispatch(resetAction);
