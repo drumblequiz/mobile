@@ -35,7 +35,12 @@ class OptionsScreen extends React.Component {
   };
 
   handleSettingClick(key) {
-    this.props.navigation.navigate(key);
+    this.props.navigation.navigate({
+    routeName: key,
+    params: {
+        transition: 'left'
+    }
+    });
   }
 
   selectedLanguage() {

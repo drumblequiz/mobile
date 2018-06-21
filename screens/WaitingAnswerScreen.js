@@ -18,7 +18,7 @@ class WaitingAnswerScreen extends React.Component {
         this.props.nextQuestionChanged(false);
         const resetAction = StackActions.reset({
           index: 0, actions: [
-            NavigationActions.navigate({ routeName: 'Truth' })
+            NavigationActions.navigate({ routeName: 'Truth', params: { transition: 'zoom' } })
           ],
         });
         this.props.navigation.dispatch(resetAction);

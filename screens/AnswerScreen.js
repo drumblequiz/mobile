@@ -17,7 +17,7 @@ class AnswerScreen extends React.Component {
         this.props.nextQuestionChanged(false);
         const resetAction = StackActions.reset({
           index: 0, actions: [
-            NavigationActions.navigate({ routeName: 'Truth' })
+            NavigationActions.navigate({ routeName: 'Truth', params: { transition: 'zoom' } })
           ],
         });
         this.props.navigation.dispatch(resetAction);
@@ -56,7 +56,7 @@ class AnswerScreen extends React.Component {
     this.props.select(this.props.socket.answers[numb]);
     const resetAction = StackActions.reset({
       index: 0, actions: [
-        NavigationActions.navigate({ routeName: 'WaitingAnswer' })
+        NavigationActions.navigate({ routeName: 'WaitingAnswer', params: { transition: 'zoom' } })
       ],
     });
     this.props.navigation.dispatch(resetAction);
