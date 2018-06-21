@@ -3,7 +3,7 @@ import { AppRegistry, TouchableOpacity, TextInput, View, Text} from 'react-nativ
 import { SafeAreaView, StackActions, NavigationActions } from 'react-navigation';
 import Image from 'react-native-scalable-image';
 import { connect } from 'react-redux';
-import { select, nextQuestionChanged } from '../actions/network.js';
+import { select, nextQuestionChanged, answerChosenChanged } from '../actions/network.js';
 
 import styleGeneral from '../styles/general.js';
 
@@ -45,6 +45,7 @@ class AnswerScreen extends React.Component {
   {
     clearInterval(this.myInterval);
     //this.props.socket.answers.sort((a, b) => a.AnswerId < b.AnswerId);
+    this.props.answerChosenChanged(this.props.socket.answers[numb]);
     this.props.select(this.props.socket.answers[numb]);
     const resetAction = StackActions.reset({
       index: 0, actions: [
@@ -114,4 +115,4 @@ const mapStateToProps = state => {
   return { language: state.language, socket: state.socket, theme: state.theme };
 };
 
-export default connect(mapStateToProps, {select, nextQuestionChanged, })(AnswerScreen);
+export default connect(mapStateToProps, {select, nextQuestionChanged, answerChosenChanged, })(AnswerScreen);

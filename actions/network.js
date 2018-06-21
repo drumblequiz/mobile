@@ -118,3 +118,10 @@ export const showErrorChanged = (status) => {
     payload: {status}
   };
 };
+
+export const answerChosenChanged = (status) => {
+  return {
+    type: 'SET_ANSWER_CHOSEN',
+    payload: {status}
+  };
+};

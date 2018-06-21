@@ -22,6 +22,7 @@ const initialState = {
   correctAnswerReceived: false,
   showError: false,
   disconnected: false,
+  answerChosen: "",
 };
 
 const SocketReducer = (state = initialState, action) => {
@@ -125,6 +126,8 @@ const SocketReducer = (state = initialState, action) => {
       case 'SET_CORRECT_ANSWER_RECEIVED':
         return { ...state, correctAnswerReceived: action.payload.status};
       case 'SET_SHOW_ERROR':
+        return { ...state, showError: action.payload.status};
+      case 'SET_ANSWER_CHOSEN':
         return { ...state, showError: action.payload.status};
     default:
       return state;

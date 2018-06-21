@@ -21,6 +21,18 @@ class TruthScreen extends React.Component {
       header: null,
   };
 
+  isCorrect()
+  {
+      if (this.props.socket.answerChosen in this.props.socket.correctAnswArr)
+      {
+          return true;
+      }
+      else
+      {
+          return false;
+      }
+  }
+
   selectedLanguage() {
     return this.props.language.language;
   }
