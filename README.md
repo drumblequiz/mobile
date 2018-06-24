@@ -2,6 +2,10 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
 
+Link to the server, which this project depends on: https://github.com/drumblequiz/app
+
+After installing the server, you MUST change ip address in config.json in order for the mobile application to connect to the server.
+
 ## Table of Contents
 
 * [Updating to New Releases](#updating-to-new-releases)
